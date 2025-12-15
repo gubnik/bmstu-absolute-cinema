@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center padding-30-20">
+    <h2>💺 Свободные места на сеанс</h2>
+
+    <div class="form-container">
+        <form action="{{ url_for('available_seats_bp.available_seats_result_handler') }}" method="post">
+            <div class="margin-15-0">
+                <label for="session_id" class="form-label">Выберите сеанс:</label>
+                <select id="session_id" name="session_id" class="form-input" required>
+                    {% if sessions %}
+                        {% for session in sessions %}
+                        <option value="{{ session.session_id }}">{{ session.display_name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        <option value="">Нет доступных сеансов</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <div class="margin-30-0">
+                <button type="submit" class="menu-button" style="width: 98%;" {% if not sessions %}disabled{% endif %}>
+                    🔍 Показать свободные места
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="navigation">
+        <a href="{{ url_for('queries_menu_bp.queries_menu_handler') }}" class="menu-button nav-button">🔙 Назад к запросам</a>
+        <br>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button">🏠 Главное меню</a>
+    </div>
+</div>
+{% endblock %}
+

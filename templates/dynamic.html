@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="padding-20">
+    <h2>{{ prod_title }}</h2>
+
+    {% if products and products|length > 0 %}
+        <div class="overflow-auto">
+            <table>
+                <thead>
+                    <tr>
+                        {% for key in products[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        {% for value in product.values() %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="text-grey">
+            Найдено записей: {{ products|length }}
+        </p>
+    {% else %}
+        <div class="error-message">
+            Данные не найдены
+        </div>
+    {% endif %}
+
+    <div class="navigation">
+        <a href="javascript:history.back()" class="menu-button">
+             🔙 К поиску
+        </a>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button">
+            🏠 Главное меню
+        </a>
+    </div>
+</div>
+{% endblock %}
+

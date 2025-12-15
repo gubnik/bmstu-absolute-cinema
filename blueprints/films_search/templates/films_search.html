@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center padding-30-20">
+    <h2>🔎 Поиск фильмов</h2>
+
+    <div class="form-container">
+        <form action="{{ url_for('films_search_bp.films_search_result_handler') }}" method="post">
+            <div class="margin-15-0">
+                <label for="search_type" class="form-label">Искать по:</label>
+                <select id="search_type" name="search_type" class="form-input" required>
+                    <option value="year">📅 Году выпуска</option>
+                    <option value="country">🌍 Стране производителю</option>
+                    <option value="director">🎬 Режиссёру</option>
+                </select>
+            </div>
+
+            <div class="margin-15-0">
+                <label for="search_value" class="form-label">Значение для поиска:</label>
+                <input type="text" id="search_value" name="search_value" 
+                       class="form-input" placeholder="Введите значение..." required>
+            </div>
+
+            <div class="margin-30-0">
+                <button type="submit" class="menu-button" style="width: 98%;">
+                    🔍 Найти фильмы
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="navigation">
+        <a href="{{ url_for('queries_menu_bp.queries_menu_handler') }}" class="menu-button nav-button">🔙 Назад к запросам</a>
+        <br>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button">🏠 Главное меню</a>
+    </div>
+</div>
+{% endblock %}
+

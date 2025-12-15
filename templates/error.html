@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; padding: 50px 20px;">
+    <h2> Ошибка</h2>
+
+    <div class="error-message">
+        {{ error_message }}
+    </div>
+
+    <div class="navigation">
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button">
+            Главное меню
+        </a>
+        <br>
+        <a href="{{ url_for('auth_bp.logout_handler') }}" class="menu-button exit-button">
+            Выход из системы
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
+
