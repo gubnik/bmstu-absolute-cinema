@@ -5,26 +5,26 @@
     <h2>🔍 Меню запросов</h2>
 
     <div class="navigation">
-        <p style="color: #696969; font-size: 10pt; margin: 15px 0 5px 0;">🎬 Запросы по фильмам</p>
+        <h3 style="color: #696969; font-size: 10pt; margin: 15px 0 5px 0;">Запросы по фильмам</h3>
         
         <a href="{{ url_for('films_search_bp.films_search_handler') }}" class="menu-button">
             🔎 Поиск фильмов
         </a>
-        <br>
+        <hr>
         
-        <p style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">🎟️ Билеты</p>
+        <h3 style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">Билеты</h3>
         
         <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-button">
             💺 Свободные места на сеанс
         </a>
-        <br>
+        <hr>
         
-        <p style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">🏛️ Залы</p>
+        <h3 style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">Залы</h3>
         
         <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-button">
             🏛️ Список залов
         </a>
-        <br>
+        <hr>
         
         <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button" style="margin-top: 30px;">
             🏠 Главное меню

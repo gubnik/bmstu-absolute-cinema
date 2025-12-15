@@ -6,3 +6,6 @@ mysql-init/
 *.md
 test*
 **/__pycache__/
+node_modules/
+package-lock.json
+static/css/output.css

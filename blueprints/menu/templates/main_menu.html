@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="text-align: center; padding: 50px 20px;">
-    <h2>🎬 Кинотеатр</h2>
+<div style="text-align: center; padding: 10px 20px;">
+    <h2 class="text-white text-[25px] font-bold">🎬 Кинотеатр</h2>
 
     {% if session.user %}
-    <div style="margin: 20px auto; padding: 15px; background: linear-gradient(145deg, #f8f9fa, #e9ecef); 
-                border-radius: 10px; max-width: 400px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-        <p style="margin: 5px; color: #1a1a2e; font-size: 11pt;">
+    <div class="menu-header">
+        <p style="margin: 5px; color: white; font-size: 16pt;">
             👤 Пользователь: <strong>{{ session.user.login }}</strong>
         </p>
-        <p style="margin: 5px; color: #1a1a2e; font-size: 11pt;">
+        <p style="margin: 5px; color: white; font-size: 14pt;">
             {% if session.user.role == 'admin' %}
                 Роль: <strong style="color: #DFBF0E;">Администратор</strong>
             {% elif session.user.role == 'manager' %}
@@ -26,15 +25,14 @@
 
     <div class="navigation">
         
-        
         {% if session.user and session.user.role in ['cashier', 'manager', 'admin'] %}
         
-        <h2>Раздел для кассиров</h2>
-        <p style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">🎟️ Работа с билетами</p>
-        <a href="{{ url_for('ticket_cart_bp.ticket_cart_get') }}" class="menu-button">
+        <p class="menu-label">🎟️ Работа с билетами</p>
+        <a href="{{ url_for('ticket_cart_bp.ticket_cart_get') }}" class="menu-btn">
             Касса - Продажа билетов
         </a>
-        <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-button">
+        <br>
+        <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-btn">
             Свободные места
         </a>
         <br>
@@ -42,9 +40,10 @@
         {% endif %}
 
         {% if session.user and session.user.role in ['manager', 'admin'] %}
-        <h2>Раздел для менеджеров</h2>
-        <p style="color: #696969; font-size: 10pt; margin: 15px 0 5px 0;">🔍 Запросы</p>
-        <a href="{{ url_for('queries_menu_bp.queries_menu_handler') }}" class="menu-button">
+
+        <br>
+        <p class="menu-label">🔍 Запросы</p>
+        <a href="{{ url_for('queries_menu_bp.queries_menu_handler') }}" class="menu-btn">
             Меню запросов
         </a>
         <br>
@@ -54,23 +53,25 @@
         
         {% if session.user and session.user.role == 'admin' %}
         
-        <h2>Раздел для администрации</h2>
-        <p style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">📊 Отчёты</p>
-        <a href="{{ url_for('ticket_report_bp.ticket_report_input_handler') }}" class="menu-button">
+        <br>
+        <p class="menu-label">📊 Отчёты</p>
+        <a href="{{ url_for('ticket_report_bp.ticket_report_input_handler') }}" class="menu-btn">
             Отчёт по продажам билетов
-        </a>
-        <p style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">⚙️ Администрирование</p>
-        <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-button">
-            Список залов
         </a>
         <br>
         <hr>
+        <br>
+        <p class="menu-label">⚙️ Администрирование</p>
+        <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-btn">
+            Список залов
+        </a>
+        <br>
         
         {% endif %}
         
-        <a href="{{ url_for('auth_bp.logout_handler') }}" class="menu-button exit-button">
+        <h2 href="{{ url_for('auth_bp.logout_handler') }}" class="exit-btn">
             Выход из системы
-        </a>
+        </h2>
     </div>
 </div>
 
