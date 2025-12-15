@@ -1,0 +1,8 @@
+.env
+.idea/
+docs/
+mysql-init/
+*.png
+*.md
+test*
+**/__pycache__/
