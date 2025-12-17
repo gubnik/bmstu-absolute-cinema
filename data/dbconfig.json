@@ -1,9 +1,0 @@
-{
-    "host": "db",
-    "user": "root",
-    "password": "1",
-    "database": "cinema",
-    "port": 3306,
-    "charset": "utf8mb4"
-}
-
