@@ -11,7 +11,6 @@ FROM
     cinema.tickets t
 WHERE
     t.session_id = %s
-    AND t.is_sold = 0
 ORDER BY
     t.row_num, t.seat_number;
 

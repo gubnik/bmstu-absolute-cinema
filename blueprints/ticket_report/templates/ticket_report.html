@@ -18,9 +18,9 @@
                        value="{{ form_data.year if form_data else '' }}">
             </div>
 
-            <div class="button-group">
-                <button type="submit" name="action" value="add" class="menu-button">📝 Сформировать отчёт</button>
-                <button type="submit" name="action" value="get" class="menu-button">📄 Получить отчёт</button>
+            <div class="btn-group">
+                <button type="submit" name="action" value="add" class="group-btn">📝 Сформировать отчёт</button>
+                <button type="submit" name="action" value="get" class="group-btn">📄 Получить отчёт</button>
             </div>
         </form>
 
@@ -32,20 +32,20 @@
         </div>
 
         {% if error_message %}
-            <div class="error-message">
+            <div class="cart-msg-error">
                 {{ error_message }}
             </div>
         {% endif %}
 
         {% if success_message %}
-            <div class="success-message" style="background: #d4edda; border: 1px solid #28a745; border-radius: 8px; padding: 15px; margin-top: 15px;">
+            <div class="cart-msg-ok">
                 ✅ {{ success_message }}
             </div>
         {% endif %}
     </div>
 
     <div class="navigation margin-top-20">
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button">🏠 Главное меню</a>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">🏠 Главное меню</a>
     </div>
 </div>
 {% endblock %}

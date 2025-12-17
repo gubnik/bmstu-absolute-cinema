@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-back-3;
+    @apply bg-back-1;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
@@ -14,17 +14,21 @@ body {
 }
 
 .container {
-    @apply bg-back-4;
+    @apply bg-back-3;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     padding: 40px;
-    max-width: 700px;
+    max-width: 1200px;
     width: 90%;
     text-align: center;
 }
 
+.menu-header-label {
+    @apply text-white text-[30px] font-bold;
+}
+
 .menu-header {
-    @apply bg-back-3 p-10;
+    @apply bg-back-4 p-10;
     margin: 2px auto;
     border-radius: 10px;
     max-width: 400px;
@@ -32,24 +36,24 @@ body {
 }
 
 .menu-label {
-    @apply mx-auto block text-white text-lg;
+    @apply mx-auto block text-white text-[22pt] font-bold;
 }
 
 .menu-btn {
-    @apply bg-primary-4 text-white font-bold p-5 rounded-lg mx-auto block;
+    @apply bg-primary-4 text-white font-bold p-5 rounded-lg mx-auto my-10 block;
     cursor: pointer;
 }
 
 .menu-btn:hover {
     @apply bg-primary-5;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(50, 160, 140, 0.4);
+    box-shadow: 0 5px 15px rgba(35, 140, 120, 0.4);
     text-decoration: none;
     color: white;
 }
 
 .exit-btn {
-    @apply bg-primary-17 text-white font-bold p-5 rounded;
+    @apply bg-primary-17 text-white font-bold p-5 rounded mx-auto block;
     cursor: pointer;
 }
 
@@ -65,4 +69,319 @@ body {
 
 .navigation p {
     margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+th {
+    @apply bg-primary-4 text-primary-15;
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid;
+}
+
+td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+tr:hover {
+    background: white;
+}
+
+.form-container {
+    @apply bg-back-4;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(50, 160, 140, 0.4);
+}
+
+.form-input {
+    @apply bg-primary-15 text-primary-0;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-input:focus {
+    @apply text-primary-4;
+    outline: none;
+    box-shadow: 0 0 5px rgba(233, 69, 96, 0.3);
+}
+
+.form-label {
+    @apply block text-primary-14 font-bold;
+    font-size: 22pt;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.session-choice {
+    @apply bg-back-4;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    color: white;
+}
+
+.session-choice-select {
+    @apply bg-primary-14 p-[12px] text-[14pt] text-primary-1;
+    width: 100%;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.session-ticket-container {
+    @apply bg-back-4;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: none;
+}
+
+.session-ticket {
+    @apply bg-back-3 p-[12px] text-[14pt] text-primary-4;
+    flex: 0 0 160px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(25, 80, 30, 0.4);
+}
+
+.session-ticket-in-cart {
+    @apply bg-primary-20 p-[12px] text-[14pt] text-primary-1;
+    flex: 0 0 160px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(35, 140, 120, 0.4);
+}
+
+.session-ticket-sold {
+    @apply bg-back-5 p-[12px] text-[14pt] text-primary-15;
+    flex: 0 0 160px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(35, 140, 120, 0.4);
+}
+
+.session-ticket .label {
+    @apply text-primary-1 bg-primary-4;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: translate 0.25s ease;
+}
+
+.session-ticket .label:hover {
+    @apply bg-primary-5 text-primary-15;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(35, 140, 120, 0.4);
+    text-decoration: none;
+}
+
+.session-ticket-in-cart .label {
+    @apply text-primary-1 bg-primary-10;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    transition: scale 0.25s ease;
+    transition: background 0.25s ease;
+}
+
+.session-ticket-in-cart .label:hover {
+    @apply bg-primary-19;
+    transform: scale(0.9)
+}
+
+.session-ticket-sold .label {
+    @apply text-primary-0 bg-primary-3;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    transition: background 0.25s ease;
+}
+
+.session-ticket-sold .label:hover {
+    @apply bg-primary-19;
+}
+
+.session-ticket .seat-number-label {
+    @apply text-primary-15 text-[20pt];
+    margin: 0 0 5px 0;
+}
+
+.session-ticket .price-label {
+    @apply text-primary-12;
+    margin: 0 0 5px 0;
+}
+
+.session-ticket-in-cart .seat-number-label {
+    @apply text-primary-15 text-[20pt];
+    margin: 0 0 5px 0;
+}
+
+.session-ticket-in-cart .price-label {
+    @apply text-primary-12;
+    margin: 0 0 5px 0;
+}
+
+.session-ticket-sold .seat-number-label {
+    @apply text-primary-15 text-[20pt];
+    margin: 0 0 5px 0;
+}
+
+.session-ticket-sold .price-label {
+    @apply text-primary-18;
+    margin: 0 0 5px 0;
+}
+
+.row-group {
+    margin-bottom: 16px;
+}
+
+.row-label {
+    @apply text-white text-[24pt] mb-[8px] font-bold;
+    font-weight: 600;
+}
+
+.row-tickets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+
+.cart-msg-ok {
+    @apply p-[12px] bg-transparent-4 border-l-[4px] border-solid border-l-primary-5;
+    @apply text-[18pt] text-white font-bold;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+
+.cart-msg-error {
+    @apply p-[12px] bg-transparent-2 border-l-[4px] border-solid border-l-primary-3;
+    @apply text-[18pt] text-white font-bold;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+
+.cart-msg-notice {
+    @apply p-[12px] bg-primary-17;
+    @apply text-[18pt] text-white font-bold;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+
+.cart-container {
+    @apply bg-back-4 text-white p-[20px];
+    border-radius: 15px;
+    width: 100%;
+    max-width: none;
+}
+
+.cart-table {
+    @apply text-primary-1 bg-back-3;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.cart-table td {
+    @apply bg-primary-18 text-primary-1 border-b-primary-15;
+}
+
+.cart-remove-btn {
+    @apply bg-primary-2 text-white text-center border-0 w-[2.5em] h-[2.5em] rounded-lg;
+    cursor: pointer;
+    transition: border-radius 0.25s ease;
+}
+
+.cart-remove-btn:hover {
+    @apply bg-primary-3 rounded-[50%];
+    transform: translateY(-2px);
+}
+
+.cart-notice {
+    @apply p-[12px] bg-transparent-11 border-l-[8px] border-r-[8px] border-solid border-l-primary-10 border-r-primary-10;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+.cart-notice-with-cart {
+    @apply p-[12px] bg-transparent-11 border-l-[8px] border-r-[8px] border-solid border-l-primary-10 border-r-primary-10;
+    margin-top: 15px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.to-cart-btn {
+    @apply bg-primary-10 text-white text-center border-0 p-[10px] rounded-[4px] rounded-t-none mx-auto block;
+    cursor: pointer;
+}
+
+.to-cart-btn:hover {
+    @apply bg-primary-11 shadow-[0_5px_15px] shadow-transparent-11;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.with-cart:has(.to-cart-btn:hover) .cart-notice-with-cart {
+    @apply p-[12px] bg-transparent-11 border-l-[4px] border-r-[4px] border-solid border-l-primary-11 border-r-primary-11;
+}
+
+.cart-sum td {
+    @apply bg-primary-19 text-primary-6 font-bold text-[18pt];
+}
+
+.cart-sell-btn {
+    @apply bg-primary-4 text-white border-0 rounded-[10px] text-[14pt];
+    padding: 15px 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cart-clear-btn {
+    @apply bg-primary-2 text-white border-0 rounded-[10px] text-[14pt];
+    padding: 15px 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-group {
+    margin: 25px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.group-btn {
+    @apply bg-primary-4 text-white font-bold p-5 rounded-lg mx-auto block w-[100%] grow-[2];
+    cursor: pointer;
 }

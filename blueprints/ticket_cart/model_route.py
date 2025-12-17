@@ -84,7 +84,8 @@ def model_get_available_tickets(db_config, sql_provider, session_id):
             "seat_number": ticket.get("seat_number", 0),
             "price": ticket.get("price", 0),
             "film_title": ticket.get("film_title", ""),
-            "session_info": ticket.get("session_info", "")
+            "session_info": ticket.get("session_info", ""),
+            "is_sold": ticket.get("is_sold", False)
         }.items()}
 
         redis_conn.set_value(info_key, info_value, ttl)

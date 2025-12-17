@@ -2,31 +2,31 @@
 
 {% block content %}
 <div style="text-align: center; padding: 50px 20px;">
-    <h2>🔍 Меню запросов</h2>
+    <h2 class="menu-header-label">🔍 Меню запросов</h2>
 
     <div class="navigation">
-        <h3 style="color: #696969; font-size: 10pt; margin: 15px 0 5px 0;">Запросы по фильмам</h3>
+        <h3 class="menu-label">Запросы по фильмам</h3>
         
-        <a href="{{ url_for('films_search_bp.films_search_handler') }}" class="menu-button">
+        <a href="{{ url_for('films_search_bp.films_search_handler') }}" class="menu-btn">
             🔎 Поиск фильмов
         </a>
         <hr>
         
-        <h3 style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">Билеты</h3>
+        <h3 class="menu-label">Билеты</h3>
         
-        <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-button">
+        <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-btn">
             💺 Свободные места на сеанс
         </a>
         <hr>
         
-        <h3 style="color: #696969; font-size: 10pt; margin: 20px 0 5px 0;">Залы</h3>
+        <h3 class="menu-label">Залы</h3>
         
-        <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-button">
+        <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-btn">
             🏛️ Список залов
         </a>
         <hr>
         
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button" style="margin-top: 30px;">
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn nav-button" style="margin-top: 30px;">
             🏠 Главное меню
         </a>
     </div>

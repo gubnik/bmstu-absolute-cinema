@@ -52,12 +52,14 @@ def ticket_cart_get():
         
         # Считаем общую сумму корзины
         total_sum = sum(item.get('price', 0) for item in cart)
-        
+        cart_ids = [ticket["ticket_id"] for ticket in cart]
+
         return render_template("ticket_cart.html", 
                               sessions=sessions, 
                               tickets=tickets,
                               cart=cart,
-                              total_sum=total_sum)
+                              total_sum=total_sum,
+                              cart_ids=cart_ids)
         
     except Exception as e:
         return render_template("error.html", error_message=f"Системная ошибка: {str(e)}")
@@ -77,11 +79,13 @@ def select_session():
         session.pop('selected_session_id', None)
         flash("ℹ️ Выбор сеанса сброшен")
     
+    """
     # Очищаем корзину при смене сеанса
     user_data = session.get("user")
     if user_data:
         user_id = user_data["user_id"]
         redis_conn.set_cart(user_id, [])
+    """
     
     return redirect(url_for("ticket_cart_bp.ticket_cart_get"))
 

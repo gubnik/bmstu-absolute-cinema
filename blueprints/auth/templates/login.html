@@ -2,8 +2,8 @@
 
 {% block content %}
 <div style="text-align: center; padding: 30px 20px;">
-    <h2>🎬 Вход в систему</h2>
-    <p style="color: #666; margin-bottom: 30px;">Кинотеатр - Информационная система</p>
+    <h2 class="menu-label">🎬 Вход в систему</h2>
+    <p class="menu-header-label">Кинотеатр - Информационная система</p>
 
     <div class="form-container">
         <form action="{{ url_for('auth_bp.login_result_handler') }}" method="post">
@@ -26,7 +26,7 @@
             {% endif %}
 
             <div style="margin: 30px 0;">
-                <button type="submit" class="menu-button" style="width: 100%;">
+                <button type="submit" class="menu-btn" style="width: 100%;">
                     🔑 Войти
                 </button>
             </div>

@@ -3,16 +3,18 @@
 {% block content %}
 <div style="padding: 20px; max-width: 1200px; margin: 0 auto;">
     
-    <h2 style="text-align: center;">🎟️ Касса - Продажа билетов</h2>
+    <h2 class="menu-header-label">🎟️ Касса - Продажа билетов</h2>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div style="margin: 15px 0;">
                 {% for msg in messages %}
-                    <div style="padding: 10px 15px; margin: 5px 0; border-radius: 8px;
-                        {% if '✅' in msg %}background: #d4edda; color: #155724; border: 1px solid #c3e6cb;
-                        {% elif '❌' in msg or '⚠️' in msg %}background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;
-                        {% else %}background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db;{% endif %}">
+                    <div class="
+                        {% if '✅' in msg %} cart-msg-ok
+                        {% elif '❌' in msg or '⚠️' in msg %} cart-msg-error
+                        {% else %} cart-msg-notice
+                        {% endif %}"
+                    >
                         {{ msg }}
                     </div>
                 {% endfor %}
@@ -21,15 +23,13 @@
     {% endwith %}
 
     <!-- Блок выбора сеанса -->
-    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); 
-                border-radius: 15px; padding: 20px; margin: 20px 0; color: white;">
-        <h3 style="margin: 0 0 15px 0; color: #e94560;">🎬 Выбор сеанса</h3>
+    <div class="session-choice">
+        <h3 class="menu-label">🎬 Выбор сеанса</h3>
         
         {% if sessions %}
             <form method="post" action="{{ url_for('ticket_cart_bp.select_session') }}">
                 <select name="selected_session_id" onchange="this.form.submit()" 
-                        style="width: 100%; padding: 12px; font-size: 14pt; border-radius: 8px; 
-                               border: 2px solid #e94560; background: white; color: #333;">
+                        class="session-choice-select">
                     <option value="">-- Выберите сеанс --</option>
                     {% for sess in sessions %}
                     <option value="{{ sess.session_id }}" 
@@ -40,17 +40,36 @@
                 </select>
             </form>
 
+            
+            {% if cart %}
+            <div class="with-cart">
+                {% if session.selected_session_id %}
+                    {% for sess in sessions %}
+                        {% if sess.session_id == session.selected_session_id %}
+                        <div class="cart-notice-with-cart">
+                            <p style="margin: 3px 0;"><strong>Фильм:</strong> {{ sess.film_title }}</p>
+                            <p style="margin: 3px 0;"><strong>Зал:</strong> {{ sess.hall_name }} | 
+                               <strong>Свободно мест:</strong> {{ sess.available_tickets }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <a class="to-cart-btn w-[100%] mt-5" id="scroll-bottom">
+                    В корзину
+                </a>
+            </div>
+            {% else %}
             {% if session.selected_session_id %}
                 {% for sess in sessions %}
                     {% if sess.session_id == session.selected_session_id %}
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(233, 69, 96, 0.2); 
-                                border-radius: 8px; border-left: 4px solid #e94560;">
+                    <div class="cart-notice">
                         <p style="margin: 3px 0;"><strong>Фильм:</strong> {{ sess.film_title }}</p>
                         <p style="margin: 3px 0;"><strong>Зал:</strong> {{ sess.hall_name }} | 
                            <strong>Свободно мест:</strong> {{ sess.available_tickets }}</p>
                     </div>
                     {% endif %}
                 {% endfor %}
+            {% endif %}
             {% endif %}
         {% else %}
             <p style="text-align: center;">❌ Нет доступных сеансов с билетами</p>
@@ -59,35 +78,52 @@
 
     <!-- Список билетов -->
     {% if session.selected_session_id and tickets %}
-    <div style="background: #f5f5f5; border-radius: 15px; padding: 20px; margin: 20px 0;">
-        <h3 style="color: #333; margin: 0 0 15px 0;">💺 Свободные места</h3>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;">
-            {% for ticket in tickets %}
-            <div style="background: white; border-radius: 10px; padding: 12px; text-align: center;
-                        box-shadow: 0 2px 6px rgba(0,0,0,0.1); border: 2px solid #e9ecef;">
-                <p style="margin: 0 0 5px 0; font-weight: bold; color: #1a1a2e;">
-                    Ряд {{ ticket.row_num }}
-                </p>
-                <p style="margin: 0 0 5px 0; font-size: 18pt; color: #e94560;">
-                    {{ ticket.seat_number }}
-                </p>
-                <p style="margin: 0 0 10px 0; font-size: 11pt; color: #666;">
-                    {{ ticket.price }} руб.
-                </p>
-                
-                <form action="{{ url_for('ticket_cart_bp.add_ticket_to_cart', ticket_id=ticket.ticket_id) }}" 
-                      method="post">
-                    <button type="submit" 
-                            style="width: 100%; padding: 8px; border: none; border-radius: 6px;
-                                   background: #28a745;
-                                   color: white; font-size: 11pt; cursor: pointer;">
-                        ➕ В корзину
-                    </button>
-                </form>
+    <div class="session-ticket-container">
+        <h3 class="menu-label mb-5">💺 Свободные места</h3>
+        <hr>
+        {% set grouped = {} %}
+        {% for ticket in tickets %}
+            {% set _ = grouped.setdefault(ticket.row_num, []) %}
+            {% set _ = grouped[ticket.row_num].append(ticket) %}
+        {% endfor %}
+        {% for row_num, row_tickets in grouped|dictsort %}
+        <div class="row-group">
+            <div class="row-label">Ряд {{ row_num }}</div>
+            <div class="row-tickets">
+                {% for ticket in row_tickets %}
+                {% if not ticket.is_sold %}
+                    {% if not ticket.ticket_id in cart_ids %}
+                    <div class="session-ticket">
+                        <p class="seat-number-label">{{ ticket.seat_number }}</p>
+                        <p class="price-label">{{ ticket.price }} руб.</p>
+                        <form action="{{ url_for('ticket_cart_bp.add_ticket_to_cart', ticket_id=ticket.ticket_id) }}" method="post">
+                            <button type="submit" class="label">➕ В корзину</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <div class="session-ticket-in-cart">
+                        <p class="seat-number-label">{{ ticket.seat_number }}</p>
+                        <p class="price-label">{{ ticket.price }} руб.</p>
+                        <div class="label">
+                            🛒  Добавлен
+                        </div>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    <div class="session-ticket-sold">
+                        <p class="seat-number-label">{{ ticket.seat_number }}</p>
+                        <p class="price-label">{{ ticket.price }} руб.</p>
+                        <div class="label">
+                            ✕ Продан 
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+        <hr>
+        <br>
+      {% endfor %}
     </div>
     {% elif session.selected_session_id %}
     <div style="background: #f5f5f5; border-radius: 15px; padding: 30px; margin: 20px 0; text-align: center;">
@@ -96,17 +132,16 @@
     {% endif %}
 
     <!-- Корзина билетов -->
-    <div style="background: #0f3460;
-                border-radius: 15px; padding: 20px; margin: 20px 0; color: white;">
-        <h3 style="margin: 0 0 15px 0; color: #e94560;">
-            🛒 Корзина {% if cart %}({{ cart|length }} билетов){% endif %}
-        </h3>
+    <div class="cart-container">
+        <h2 class="menu-label">
+            🛒 Корзина {% if cart %}({{ cart|length }} бил.){% endif %}
+        </h2>
         
         {% if cart %}
-            <div style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 15px; color: #333;">
+            <div class="cart-table">
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
-                        <tr style="border-bottom: 2px solid #e94560;">
+                        <tr>
                             <th style="padding: 10px; text-align: left;">Фильм</th>
                             <th style="padding: 10px; text-align: center;">Ряд</th>
                             <th style="padding: 10px; text-align: center;">Место</th>
@@ -116,15 +151,14 @@
                     </thead>
                     <tbody>
                         {% for item in cart %}
-                        <tr style="border-bottom: 1px solid #eee;">
-                            <td style="padding: 10px;">{{ item.film_title }}</td>
+                        <tr>
+                            <td style="padding: 10px; text-align: left;">{{ item.film_title }}</td>
                             <td style="padding: 10px; text-align: center;">{{ item.row_num }}</td>
                             <td style="padding: 10px; text-align: center;">{{ item.seat_number }}</td>
                             <td style="padding: 10px; text-align: right;">{{ item.price }} руб.</td>
-                            <td style="padding: 10px; text-align: center;">
+                            <td style="padding: 10px; text-align: right; margin-right: 10px;">
                                 <form method="post" action="{{ url_for('ticket_cart_bp.remove_ticket_from_cart', ticket_id=item.ticket_id) }}" style="margin: 0;">
-                                    <button type="submit" style="background: #dc3545; color: white; border: none; 
-                                                                padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                                    <button type="submit" class="cart-remove-btn">
                                         ✕
                                     </button>
                                 </form>
@@ -133,9 +167,9 @@
                         {% endfor %}
                     </tbody>
                     <tfoot>
-                        <tr style="border-top: 2px solid #e94560; font-weight: bold;">
+                        <tr class="cart-sum">
                             <td colspan="3" style="padding: 10px; text-align: right;">Итого:</td>
-                            <td style="padding: 10px; text-align: right; color: #e94560; font-size: 14pt;">{{ total_sum }} руб.</td>
+                            <td style="text-align: right;">{{ total_sum }} руб.</td>
                             <td></td>
                         </tr>
                     </tfoot>
@@ -145,17 +179,13 @@
             <!-- Кнопки действий -->
             <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
                 <form method="post" action="{{ url_for('ticket_cart_bp.buy_tickets') }}">
-                    <button type="submit" style="padding: 15px 30px; background: linear-gradient(135deg, #28a745, #218838);
-                                                color: white; border: none; border-radius: 10px; font-size: 14pt;
-                                                cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <button type="submit" class="cart-sell-btn">
                         💳 Оформить продажу
                     </button>
                 </form>
 
                 <form method="post" action="{{ url_for('ticket_cart_bp.clear_ticket_cart') }}">
-                    <button type="submit" style="padding: 15px 30px; background: linear-gradient(135deg, #dc3545, #c82333);
-                                                color: white; border: none; border-radius: 10px; font-size: 14pt;
-                                                cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <button type="submit" class="cart-clear-btn">
                         🗑️ Очистить корзину
                     </button>
                 </form>
@@ -169,8 +199,15 @@
     </div>
 
     <div class="navigation" style="margin-top: 20px; text-align: center;">
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button nav-button">🏠 Главное меню</a>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">🏠 Главное меню</a>
     </div>
 </div>
+{% if cart %}
+<script>
+document.getElementById('scroll-bottom').addEventListener('click', function () {
+  window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+});
+</script>
+{% endif %}
 {% endblock %}
 

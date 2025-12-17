@@ -24,6 +24,7 @@ services:
       - --skip-character-set-client-handshake
     restart: unless-stopped
     volumes:
+      - mysql-data:/var/lib/mysql
       - ./mysql-init/:/docker-entrypoint-initdb.d:ro
     networks:
       - backend
@@ -32,8 +33,14 @@ services:
     image: redis:latest
     container_name: course-redis
     restart: unless-stopped
+    volumes:
+      - redis-data:/data
     networks:
       - backend
+
+volumes:
+  mysql-data:
+  redis-data:
 
 networks:
   backend:
