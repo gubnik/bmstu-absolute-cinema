@@ -104,9 +104,12 @@
                     <div class="session-ticket-in-cart">
                         <p class="seat-number-label">{{ ticket.seat_number }}</p>
                         <p class="price-label">{{ ticket.price }} руб.</p>
-                        <div class="label">
-                            🛒  Добавлен
-                        </div>
+                        <form method="post" action="{{ url_for('ticket_cart_bp.remove_ticket_from_cart', ticket_id=ticket.ticket_id) }}">
+                            <button type="submit" class="label">
+                                <span class="default">🛒  Добавлен</span>
+                                <span class="on-hover">✕   Удалить</span>
+                            </button>
+                        </form>
                     </div>
                     {% endif %}
                 {% else %}

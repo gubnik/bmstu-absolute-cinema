@@ -207,10 +207,24 @@ tr:hover {
     transition: background 0.25s ease;
 }
 
-.session-ticket-in-cart .label:hover {
-    @apply bg-primary-19;
-    transform: scale(0.9)
+.session-ticket-in-cart .label .on-hover {
+    display: none;
 }
+
+.session-ticket-in-cart .label:hover {
+    @apply bg-primary-2;
+    box-shadow: 0 5px 15px rgba(80, 40, 20, 0.4);
+    transform: scale(1.05);
+}
+
+.session-ticket-in-cart .label:hover .default {
+    display: none;
+}
+
+.session-ticket-in-cart .label:hover .on-hover {
+    display: inline;
+}
+
 
 .session-ticket-sold .label {
     @apply text-primary-0 bg-primary-3;
