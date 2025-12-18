@@ -10,9 +10,9 @@
             <div style="margin: 15px 0;">
                 {% for msg in messages %}
                     <div class="
-                        {% if '✅' in msg %} cart-msg-ok
-                        {% elif '❌' in msg or '⚠️' in msg %} cart-msg-error
-                        {% else %} cart-msg-notice
+                        {% if '✅' in msg %} msg-ok
+                        {% elif '❌' in msg or '⚠️' in msg %} msg-error
+                        {% else %} msg-notice
                         {% endif %}"
                     >
                         {{ msg }}

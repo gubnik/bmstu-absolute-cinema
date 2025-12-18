@@ -287,7 +287,7 @@ tr:hover {
 }
 
 
-.cart-msg-ok {
+.msg-ok {
     @apply p-[12px] bg-transparent-4 border-l-[4px] border-solid border-l-primary-5;
     @apply text-[18pt] text-white font-bold;
     margin-top: 15px;
@@ -296,7 +296,7 @@ tr:hover {
     margin: 5px 0;
 }
 
-.cart-msg-error {
+.msg-error {
     @apply p-[12px] bg-transparent-2 border-l-[4px] border-solid border-l-primary-3;
     @apply text-[18pt] text-white font-bold;
     margin-top: 15px;
@@ -305,7 +305,7 @@ tr:hover {
     margin: 5px 0;
 }
 
-.cart-msg-notice {
+.msg-notice {
     @apply p-[12px] bg-primary-17;
     @apply text-[18pt] text-white font-bold;
     margin-top: 15px;
