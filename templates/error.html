@@ -2,18 +2,18 @@
 
 {% block content %}
 <div style="text-align: center; padding: 50px 20px;">
-    <h2> Ошибка</h2>
+    <h2 class="menu-header-label"> Ошибка</h2>
 
-    <div class="error-message">
+    <div class="menu-label">
         {{ error_message }}
     </div>
 
     <div class="navigation">
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-button">
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">
             Главное меню
         </a>
         <br>
-        <a href="{{ url_for('auth_bp.logout_handler') }}" class="menu-button exit-button">
+        <a href="{{ url_for('auth_bp.logout_handler') }}" class="exit-btn">
             Выход из системы
         </a>
     </div>
