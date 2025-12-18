@@ -4,6 +4,7 @@ data/
 mysql-init/
 *.png
 *.md
+!README.md
 test*
 **/__pycache__/
 node_modules/
