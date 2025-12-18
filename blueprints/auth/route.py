@@ -1,24 +1,19 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
-import json
 import os
 from database.select import select_dict
 from database.sql_provider import SQLProvider
+from load_config import load_env_config
 
 auth_bp = Blueprint('auth_bp', __name__, template_folder='templates')
 
 
 def load_role_config():
-    current_dir = os.path.dirname(__file__)
-    config_path = os.path.join(current_dir, '..', '..', 'data', 'role_config.json')
-    with open(config_path) as f:
-        return json.load(f)
+    return load_env_config("ROLE_CONFIG")
 
 
 def authenticate_user(login, password):
     current_dir = os.path.dirname(__file__)
-    db_config_path = os.path.join(current_dir, '..', '..', 'data', 'dbconfig.json')
-    with open(db_config_path) as f:
-        db_config = json.load(f)
+    db_config = load_env_config("DB_CONFIG")
 
     sql_path = os.path.join(current_dir, 'sql')
     provider = SQLProvider(sql_path)

@@ -8,6 +8,9 @@ from blueprints.available_seats.route import available_seats_bp
 from blueprints.halls_list.route import halls_list_bp
 from blueprints.ticket_report.route import ticket_report_bp
 from blueprints.ticket_cart.route import ticket_cart_bp
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path=".env", override=False)
 
 app = Flask(__name__)
 app.secret_key = 'secret_cinema_key'

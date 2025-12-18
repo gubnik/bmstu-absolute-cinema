@@ -3,6 +3,7 @@ import json
 import os
 from database.sql_provider import SQLProvider
 from decorators import login_required, role_required
+from load_config import load_env_config
 from .model_route import (
     model_get_sessions_for_cart,
     model_get_available_tickets,
@@ -12,11 +13,8 @@ from cache.redis_cache import RedisCache
 
 ticket_cart_bp = Blueprint('ticket_cart_bp', __name__, template_folder='templates')
 
-# Конфиги
-with open("data/dbconfig.json") as f:
-    db_config = json.load(f)
-with open("data/cache_config.json") as f:
-    cache_config = json.load(f)
+db_config = load_env_config("DB_CONFIG")
+cache_config = load_env_config("REDIS_CONFIG")
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 redis_conn = RedisCache(cache_config["redis"])

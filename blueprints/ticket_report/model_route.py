@@ -6,7 +6,7 @@ from database.DBcm import DBContextManager
 @dataclass
 class TicketReportResponse:
     result: list
-    error_message: str
+    msg: str
     status: bool
 
 
@@ -18,7 +18,7 @@ def model_get_ticket_report(db_config, user_input_data, sql_provider):
     for field in required_fields:
         if field not in user_input_data or not user_input_data[field]:
             error_message = f"Не заполнено обязательное поле: {field}"
-            return TicketReportResponse([], error_message=error_message, status=False)
+            return TicketReportResponse([], msg=error_message, status=False)
 
     _sql = sql_provider.get('report.sql')
     params = (
@@ -31,9 +31,9 @@ def model_get_ticket_report(db_config, user_input_data, sql_provider):
     result = select_dict(db_config, _sql, params)
 
     if result:
-        return TicketReportResponse(result, error_message=error_message, status=True)
+        return TicketReportResponse(result, msg=error_message, status=True)
 
-    return TicketReportResponse([], error_message=error_message, status=False)
+    return TicketReportResponse([], msg=error_message, status=False)
 
 
 def model_add_ticket_report(db_config, user_input_data, sql_provider):
@@ -44,7 +44,7 @@ def model_add_ticket_report(db_config, user_input_data, sql_provider):
     for field in required_fields:
         if field not in user_input_data or not user_input_data[field]:
             error_message = f"Не заполнено обязательное поле: {field}"
-            return TicketReportResponse([], error_message=error_message, status=False)
+            return TicketReportResponse([], msg=error_message, status=False)
 
     year = user_input_data['year']
     month = user_input_data['month']
@@ -57,7 +57,7 @@ def model_add_ticket_report(db_config, user_input_data, sql_provider):
 
     with DBContextManager(db_config) as cursor:
         if cursor is None:
-            return TicketReportResponse([], error_message="Ошибка подключения к БД", status=False)
+            return TicketReportResponse([], msg="Ошибка подключения к БД", status=False)
 
         try:
             cursor.execute(_sql, params)
@@ -69,20 +69,20 @@ def model_add_ticket_report(db_config, user_input_data, sql_provider):
                 warning = row[0]
                 return TicketReportResponse(
                     [],
-                    error_message=warning,
+                    msg=warning,
                     status=False
                 )
 
             return TicketReportResponse(
                 [{'message': 'Отчёт успешно создан'}],
-                error_message='',
+                msg='',
                 status=True
             )
 
         except Exception as e:
             return TicketReportResponse(
                 [],
-                error_message=f"Ошибка БД: {str(e)}",
+                msg=f"Ошибка БД: {str(e)}",
                 status=False
             )
 

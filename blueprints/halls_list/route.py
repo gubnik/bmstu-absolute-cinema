@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
-import json
 import os
 from database.sql_provider import SQLProvider
+from load_config import load_env_config
 from decorators import login_required, role_required
 from .model_route import model_halls_list
 
@@ -13,9 +13,7 @@ halls_list_bp = Blueprint('halls_list_bp', __name__, template_folder='templates'
 @role_required
 def halls_list_handler():
     """Страница со списком залов"""
-    with open("data/dbconfig.json") as f:
-        db_config = json.load(f)
-    
+    db_config = load_env_config("DB_CONFIG")
     provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
     
     try:

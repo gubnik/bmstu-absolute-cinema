@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request
-import json
 import os
 from database.sql_provider import SQLProvider
 from decorators import login_required, role_required
 from .model_route import model_films_search
+from load_config import load_env_config
 
 films_search_bp = Blueprint('films_search_bp', __name__, template_folder='templates')
 
@@ -23,9 +23,7 @@ def films_search_result_handler():
     """Обработка поиска фильмов"""
     user_data = request.form
     
-    with open("data/dbconfig.json") as f:
-        db_config = json.load(f)
-    
+    db_config = load_env_config("DB_CONFIG")
     provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
     
     search_type = user_data.get('search_type')

@@ -6,6 +6,8 @@ from database.DBcm import DBContextManager
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 
+from load_config import load_env_config
+
 
 @dataclass
 class TicketCartResponse:
@@ -67,9 +69,7 @@ def model_get_available_tickets(db_config, sql_provider, session_id):
         return TicketCartResponse([], error_message="Свободные билеты не найдены", status=False)
 
     # Сохраняем информацию о билетах в Redis
-    with open("data/cache_config.json") as f:
-        cache_config = json.load(f)
-    
+    cache_config = load_env_config("REDIS_CONFIG")
     redis_conn = RedisCache(cache_config["redis"])
     ttl = cache_config.get("ttl", 3600)
 

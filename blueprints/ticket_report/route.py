@@ -3,6 +3,7 @@ import json
 import os
 from database.sql_provider import SQLProvider
 from decorators import login_required, role_required
+from load_config import load_env_config
 from .model_route import model_add_ticket_report, model_get_ticket_report
 
 ticket_report_bp = Blueprint('ticket_report_bp', __name__, template_folder='templates')
@@ -33,8 +34,7 @@ def ticket_report_post_handler():
                              error_message="Неверный формат года или месяца", 
                              form_data=user_data)
 
-    with open("data/dbconfig.json") as f:
-        db_config = json.load(f)
+    db_config = load_env_config("DB_CONFIG")
 
     provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
@@ -48,14 +48,13 @@ def ticket_report_post_handler():
                                      form_data={})
             else:
                 return render_template("ticket_report.html",
-                                     error_message=res_info.error_message,
+                                     error_message=res_info.msg,
                                      form_data=user_data)
 
         elif action == 'get':
             res_info = model_get_ticket_report(db_config, user_data, provider)
             print("res_info.result = ", res_info.result)
 
-            # Переименовываем колонки для отображения
             for row in res_info.result:
                 row['ID отчёта'] = row.pop('report_id', '')
                 row['Месяц'] = row.pop('report_month', '')
@@ -78,7 +77,7 @@ def ticket_report_post_handler():
                                          error_message="По вашему запросу данных не найдено. Сначала сформируйте отчёт.")
             else:
                 return render_template("error.html",
-                                     error_message=res_info.error_message or "Произошла ошибка при выполнении запроса.")
+                                     error_message=res_info.msg or "Произошла ошибка при выполнении запроса.")
         else:
             return render_template("ticket_report.html", 
                                  error_message="Неизвестное действие", 

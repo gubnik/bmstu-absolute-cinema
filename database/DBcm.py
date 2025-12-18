@@ -19,6 +19,7 @@ class DBContextManager:
             self.cursor = self.conn.cursor()
             return self.cursor
         except OperationalError as err:
+            print(f"DB config: {self.db_config}")
             print("Operational error:", err.args)
             return None
 
