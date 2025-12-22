@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Dict, List, Any
+from typing import Any
 from dotenv import load_dotenv
 
 
@@ -9,8 +9,6 @@ def _resolve_env(value: Any) -> Any:
     Recursively replace strings starting with $ with environment variable values.
     """
     if isinstance(value, str):
-        print(f"'{value}'")
-        print(f"'{value[1:]}'")
         if value.startswith("$"):
             return os.environ.get(value[1:], "")
         return value
@@ -40,5 +38,4 @@ def load_config(path: str) -> dict:
 def load_env_config(env: str) -> dict:
     load_dotenv(dotenv_path=".env", override=False)
     env_config = os.environ.get(env)
-    print(env, env_config)
     return load_config(env_config) if env_config is not None else {}

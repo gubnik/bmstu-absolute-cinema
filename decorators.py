@@ -1,4 +1,5 @@
 from functools import wraps
+from typing import Callable
 from flask import session, redirect, url_for, render_template
 import json
 import os
@@ -11,7 +12,7 @@ def load_role_config():
         return json.load(f)
 
 
-def login_required(f):
+def login_required(f: Callable) -> Callable:
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'user' not in session:
@@ -21,7 +22,7 @@ def login_required(f):
     return decorated_function
 
 
-def role_required(f):
+def role_required(f: Callable) -> Callable:
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'user' not in session:
