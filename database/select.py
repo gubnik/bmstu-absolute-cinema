@@ -54,13 +54,10 @@ def iterate_select_typed(cls: Type[T],
     with DBContextManager(db_config) as cursor:
         if cursor is None:
             raise ValueError("Cursor not created")
-        try:
-            if params:
-                cursor.execute(_sql, params)
-            else:
-                cursor.execute(_sql)
-        except OperationalError:
-            raise
+        if params:
+            cursor.execute(_sql, params)
+        else:
+            cursor.execute(_sql)
         desc = cursor.description or []
         col_index: dict[str, int] = {col[0].lower(): i for i, col in enumerate(desc)}
 
