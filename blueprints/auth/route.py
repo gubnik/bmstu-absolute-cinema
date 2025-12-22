@@ -1,27 +1,13 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
-import os
-from database.select import select_dict
-from database.sql_provider import SQLProvider
+from database.typing import User
 from load_config import load_env_config
+from .model_route import model_validate_user
 
 auth_bp = Blueprint('auth_bp', __name__, template_folder='templates')
 
 
 def load_role_config():
     return load_env_config("ROLE_CONFIG")
-
-
-def authenticate_user(login, password):
-    current_dir = os.path.dirname(__file__)
-    db_config = load_env_config("DB_CONFIG")
-
-    sql_path = os.path.join(current_dir, 'sql')
-    provider = SQLProvider(sql_path)
-
-    _sql = provider.get('user_auth.sql')
-    users = select_dict(db_config, _sql, (login, password))
-
-    return users[0] if users else None
 
 
 @auth_bp.route('/login', methods=['GET'])
@@ -33,16 +19,22 @@ def login_handler():
 
 @auth_bp.route('/login', methods=['POST'])
 def login_result_handler():
-    login = request.form.get('login')
-    password = request.form.get('password')
+    login: str | None = request.form.get('login')
+    password: str | None = request.form.get('password')
 
-    user = authenticate_user(login, password)
+    assert login is not None
+    assert password is not None
+
+    try:
+        user: User | None = model_validate_user(login, password)
+    except:
+        user = None
 
     if user:
         session['user'] = {
-            'user_id': user['user_id'],
-            'login': user['login'],
-            'role': user['role']
+            'user_id': user.user_id,
+            'login': user.login,
+            'role': user.role
         }
         return redirect(url_for('menu_bp.main_menu'))
     else:
