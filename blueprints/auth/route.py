@@ -25,10 +25,7 @@ def login_result_handler():
     assert login is not None
     assert password is not None
 
-    try:
-        user: User | None = model_validate_user(login, password)
-    except:
-        user = None
+    user: User | None = model_validate_user(login, password)
 
     if user:
         session['user'] = {

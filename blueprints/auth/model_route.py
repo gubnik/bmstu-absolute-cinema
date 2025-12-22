@@ -12,9 +12,11 @@ def model_validate_user(login: str, password: str):
     sql_path = os.path.join(current_dir, 'sql')
     provider = SQLProvider(sql_path)
 
-    _sql = provider.get('user_auth.sql')
-    users: list[User] = select_typed(User, db_config, _sql, (login, password))
-
+    try:
+        _sql = provider.get('user_auth.sql')
+        users: list[User] = select_typed(User, db_config, _sql, (login, password))
+    except:
+        return None
     # it is impossible to get more than one user since login is unique
     return users[0] if users else None
 
