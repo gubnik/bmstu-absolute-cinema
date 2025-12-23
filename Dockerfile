@@ -42,4 +42,4 @@ RUN chown -R appuser:appuser /app
 USER appuser
 
 EXPOSE 6969
-CMD ["gunicorn", "--bind", "0.0.0.0:6969", "app:app", "--workers", "2", "--threads", "4"]
+CMD ["gunicorn", "--bind", "0.0.0.0:6969", "app:create_app()", "--workers", "2", "--threads", "4"]
