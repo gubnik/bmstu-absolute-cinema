@@ -2,9 +2,6 @@ ARG PYTHON_VERSION=3.11
 
 FROM python:${PYTHON_VERSION}-slim AS builder
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
 WORKDIR /app
 
 COPY requirements.txt /app/
@@ -24,10 +21,6 @@ COPY static/ /app/static/
 RUN npm install && npm run build
 
 FROM python:${PYTHON_VERSION}-slim AS runtime
-
-ENV PORT=6969
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
 
 ARG UID=10001
 RUN adduser --disabled-password --gecos "" --uid ${UID} appuser
