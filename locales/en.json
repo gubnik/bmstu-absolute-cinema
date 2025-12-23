@@ -1,10 +1,12 @@
 {
     "language": "English",
 
-    "dynamic.found": "Found records:",
-    "dynamic.none": "Records not found",
+    "global.rubles": "rub",
+
+    "dynamic.label.found": "Found records",
+    "dynamic.label.none": "Records not found",
     "dynamic.button.prev": "Go back",
-    "dynamic.buttom.menu": "Main menu",
+    "dynamic.button.menu": "Main menu",
 
     "menu.label.cinema": "Cinema - informational system",
 
@@ -14,6 +16,9 @@
     "login.label.password": "Password:",
     "login.input.password": "Enter your password",
     "login.button.enter": "Login",
+
+    "seats.label.is_sold.false": "Free",
+    "seats.label.is_sold.true": "Sold",
 
     "ticket_id": "Ticket ID",
     "row_num": "Row number",
