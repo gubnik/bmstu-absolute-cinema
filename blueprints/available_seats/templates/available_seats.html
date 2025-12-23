@@ -2,34 +2,34 @@
 
 {% block content %}
 <div class="text-center padding-30-20">
-    <h2 class="menu-header-label">💺 Свободные места на сеанс</h2>
+    <h2 class="menu-header-label">💺 {{t("seats.label.header")}}</h2>
 
     <div class="form-container">
         <form action="{{ url_for('available_seats_bp.available_seats_result_handler') }}" method="post">
             <div class="margin-15-0">
-                <label for="session_id" class="form-label">Выберите сеанс:</label>
+                <label for="session_id" class="form-label">{{t("seats.label.pick_session")}}:</label>
                 <select id="session_id" name="session_id" class="form-input" required>
                     {% if sessions %}
                         {% for session in sessions %}
                         <option value="{{ session.session_id }}">{{ session.display_name }}</option>
                         {% endfor %}
                     {% else %}
-                        <option value="">Нет доступных сеансов</option>
+                        <option value="">{{t("seats.label.no_sessions")}}</option>
                     {% endif %}
                 </select>
             </div>
 
             <div class="margin-30-0">
                 <button type="submit" class="menu-btn" style="width: 98%;" {% if not sessions %}disabled{% endif %}>
-                    🔍 Показать свободные места
+                    🔍 {{t("seats.button.submit")}}
                 </button>
             </div>
         </form>
     </div>
 
     <div class="navigation">
-        <a href="{{ url_for('queries_menu_bp.queries_menu_handler') }}" class="menu-btn">🔙 Назад к запросам</a>
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">🏠 Главное меню</a>
+        <a href="{{ url_for('queries_menu_bp.queries_menu_handler') }}" class="menu-btn">🔙 {{"navigations.button.prev"}}</a>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">🏠 {{t("navigation.button.main_menu")}}</a>
     </div>
 </div>
 {% endblock %}

@@ -1,12 +1,12 @@
 SELECT 
-    t.ticket_id AS 'ID билета',
-    t.row_num AS 'Ряд',
-    t.seat_number AS 'Место',
-    CONCAT(t.price, ' руб.') AS 'Цена',
-    CASE 
-        WHEN t.is_sold = 0 THEN '✅ Свободно'
-        ELSE '❌ Продано'
-    END AS 'Статус'
+    t.ticket_id AS ticket_id,
+    t.row_num AS row_num,
+    t.seat_number AS seat_number,
+    CONCAT(t.price, '') AS price,
+    CASE
+        WHEN t.is_sold = 0 THEN "false"
+        ELSE "true"
+    END AS is_sold
 FROM
     cinema.tickets t
 WHERE

@@ -1,5 +1,5 @@
 SELECT 
-    s.session_id,
+    s.session_id AS session_id,
     CONCAT(f.title, ' | ', DATE_FORMAT(s.session_date, '%d.%m.%Y'), ' ', TIME_FORMAT(s.session_time, '%H:%i'), ' | ', h.name) as display_name
 FROM
     cinema.sessions s
