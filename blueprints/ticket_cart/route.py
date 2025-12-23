@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-import json
 import os
 from database.sql_provider import SQLProvider
 from decorators import login_required, role_required
