@@ -6,10 +6,23 @@
     "dynamic.label.found": "Found records",
     "dynamic.label.none": "Records not found",
 
+    "error.label.header": "Error occured",
+
     "navigation.button.prev": "Go back",
     "navigation.button.menu": "Main menu",
+    "navigation.button.exit": "Exit",
 
     "menu.label.cinema": "Cinema - informational system",
+    "menu.label.header": "Cinema - informational system",
+    "menu.label.user": "User",
+    "menu.label.role": "Role",
+    "menu.label.admin": "Administrator",
+    "menu.label.manager": "Manager",
+    "menu.label.cashier": "Cashier",
+    "menu.section.tickets": "Tickets",
+    "menu.section.queries": "Queries",
+    "menu.section.admin": "Administrative",
+    "menu.section.reports": "Reports",
 
     "login.label.top": "Log into the system",
     "login.label.login": "Login:",
@@ -18,12 +31,21 @@
     "login.input.password": "Enter your password",
     "login.button.enter": "Login",
 
+    "cart.label.header": "Ticket cart",
+
     "seats.label.header": "Available seats",
     "seats.label.pick_session": "Pick a session",
     "seats.label.no_sessions": "No available sessions",
+    "seats.label.no_seats": "No available seats found",
     "seats.label.is_sold.false": "Free",
     "seats.label.is_sold.true": "Sold",
     "seats.button.submit": "Show available seats",
+
+    "queries.label.header": "Queries menu",
+
+    "halls.label.header": "Halls",
+
+    "reports.label.header": "Reports",
 
     "ticket_id": "Ticket ID",
     "row_num": "Row number",
