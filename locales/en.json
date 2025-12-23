@@ -5,8 +5,9 @@
 
     "dynamic.label.found": "Found records",
     "dynamic.label.none": "Records not found",
-    "dynamic.button.prev": "Go back",
-    "dynamic.button.menu": "Main menu",
+
+    "navigation.button.prev": "Go back",
+    "navigation.button.menu": "Main menu",
 
     "menu.label.cinema": "Cinema - informational system",
 
@@ -17,8 +18,12 @@
     "login.input.password": "Enter your password",
     "login.button.enter": "Login",
 
+    "seats.label.header": "Available seats",
+    "seats.label.pick_session": "Pick a session",
+    "seats.label.no_sessions": "No available sessions",
     "seats.label.is_sold.false": "Free",
     "seats.label.is_sold.true": "Sold",
+    "seats.button.submit": "Show available seats",
 
     "ticket_id": "Ticket ID",
     "row_num": "Row number",
