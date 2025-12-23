@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 from markupsafe import Markup
 
+from blueprints.translation.route import translation_bp
 from blueprints.auth.route import auth_bp
 from blueprints.menu.route import menu_bp
 from blueprints.queries_menu.route import queries_menu_bp
@@ -28,6 +29,7 @@ class CinemaApp(Flask):
 
 
 def register_blueprints(app: CinemaApp):
+    app.register_blueprint(translation_bp)
     app.register_blueprint(menu_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(queries_menu_bp)
@@ -68,14 +70,5 @@ def create_app() -> CinemaApp:
     app.jinja_env.globals["translator"] = app.translator
 
     register_blueprints(app)
-
-    # TODO: should this be a blueprint? probably
-    @app.route("/set-locale", methods=["POST"])
-    def set_locale():
-        new_locale = request.form.get("locale")
-        if new_locale:
-            app.translator.change_locale(new_locale)
-        return redirect(request.referrer or url_for("menu.index"))
-
     return app
 
