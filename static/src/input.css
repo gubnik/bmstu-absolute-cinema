@@ -63,6 +63,18 @@ body {
     box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
 }
 
+#locale-form {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.locale-choice {
+    @apply flex bg-back-3 text-primary-15 text-[14pt] rounded-[8px] p-5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
 .navigation {
     margin-top: 30px;
 }
@@ -107,6 +119,7 @@ tr:hover {
     margin: 20px auto;
     max-width: 800px;
     box-shadow: 0 5px 15px rgba(50, 160, 140, 0.4);
+    flex: 1;
 }
 
 .form-input {
