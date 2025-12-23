@@ -1,0 +1,23 @@
+{
+    "language": "English",
+
+    "dynamic.found": "Found records:",
+    "dynamic.none": "Records not found",
+    "dynamic.button.prev": "Go back",
+    "dynamic.buttom.menu": "Main menu",
+
+    "menu.label.cinema": "Cinema - informational system",
+
+    "login.label.top": "Log into the system",
+    "login.label.login": "Login:",
+    "login.input.login": "Enter your username",
+    "login.label.password": "Password:",
+    "login.input.password": "Enter your password",
+    "login.button.enter": "Login",
+
+    "ticket_id": "Ticket ID",
+    "row_num": "Row number",
+    "seat_number": "Seat number",
+    "price": "Price",
+    "is_sold": "Status"
+}
