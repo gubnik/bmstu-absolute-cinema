@@ -48,7 +48,6 @@ class JsonTranslationProvider(TranslationProvider):
 
 
     def get_all_translations(self: Self) -> dict[str, Locale]:
-        if not self.translations:
-            self.load_all_translations()
+        self.load_all_translations()
         return self.translations
 
