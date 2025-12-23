@@ -2,7 +2,14 @@ import json
 import os
 from typing import Any
 from dotenv import load_dotenv
+from dataclasses import dataclass
 
+@dataclass
+class MtimeCache:
+    mtime: float
+    data: dict
+
+_configs_mtime_cache: dict[str, MtimeCache] = {}
 
 def _resolve_env(value: Any) -> Any:
     """
@@ -26,8 +33,12 @@ def load_config(path: str) -> dict:
     """
     load_dotenv(dotenv_path=".env", override=False)
     try:
+        mtime = os.path.getmtime(path)
+        if path in _configs_mtime_cache and mtime == _configs_mtime_cache[path].mtime:
+            return _resolve_env(_configs_mtime_cache[path].data)
         with open(path, "r", encoding="utf-8") as f:
             config = json.load(f)
+            _configs_mtime_cache[path] = MtimeCache(mtime=mtime, data=config)
     except FileNotFoundError:
         return {}
     except json.JSONDecodeError:
@@ -36,6 +47,9 @@ def load_config(path: str) -> dict:
     return _resolve_env(config)
 
 def load_env_config(env: str) -> dict:
+    """
+    Loads a config from an env var
+    """
     load_dotenv(dotenv_path=".env", override=False)
     env_config = os.environ.get(env)
     return load_config(env_config) if env_config is not None else {}
