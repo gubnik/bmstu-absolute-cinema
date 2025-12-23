@@ -1,7 +1,6 @@
-from dataclasses import asdict, dataclass
-from typing import cast
+from dataclasses import dataclass
 
-from translation.translator import t
+from translation import t
 from database.select import select_typed 
 from database.sql_provider import SQLProvider
 from load_config import load_env_config
@@ -25,7 +24,7 @@ class TicketBrief:
 @dataclass
 class SeatsInfoResponse:
     result: list[dict] | None
-    error_message: str
+    error_message: str | None
 
 
 def model_get_sessions() -> list[SessionBrief] | None:
@@ -57,7 +56,7 @@ def model_available_seats(session_id):
                 "price": f"{tb.price} {rubles_str}",
                 "is_sold": t(f"seats.label.is_sold.{tb.is_sold}")
             } for tb in result], '')
-        return SeatsInfoResponse(None, 'Свободные места не найдены или билеты ещё не сгенерированы')
+        return SeatsInfoResponse(None, t("seats.label.no_seats"))
     except Exception as e:
         return SeatsInfoResponse(None, str(e))
 
