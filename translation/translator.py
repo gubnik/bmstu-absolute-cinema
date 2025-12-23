@@ -1,5 +1,7 @@
 from typing import Self
 
+from flask import current_app
+
 from translation.locale_holder import LocaleHolder
 from .ts_provider import TranslationProvider
 
@@ -36,3 +38,7 @@ class Translator:
         if not key in ts[locale]:
             return key
         return ts[locale][key]
+
+
+def t(key: str) -> str:
+    return current_app.translator.get_text(key) # pyright: ignore
