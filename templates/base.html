@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кинотеатр - Информационная система</title>
+    <title>{{t("menu.label.cinema")}}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
 </head>
 <body>
     <div class="container">
+        <form action="{{ url_for('set_locale') }}" method="post" id="locale-form">
+            <select class="locale-choice" name="locale" onchange="this.form.submit()">
+            {% for loc in locales() %}
+                <option value="{{ loc }}" {% if translator.get_locale() == loc %}selected{% endif %}>{{ loc }}</option>
+            {% endfor %}
+            </select>
+        </form>
         {% block content %}{% endblock %}
     </div>
 </body>

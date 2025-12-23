@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         {% for key in products[0].keys() %}
-                        <th>{{ key }}</th>
+                        <th>{{ t(key) }}</th>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -27,20 +27,20 @@
         </div>
 
         <p class="menu-label">
-            Найдено записей: {{ products|length }}
+            {{t("dynamic.label.found")}} {{ products|length }}
         </p>
     {% else %}
         <div class="msg-error">
-            Данные не найдены
+            {{t("dynamic.label.none")}}
         </div>
     {% endif %}
 
     <div class="navigation">
         <a href="javascript:history.back()" class="menu-btn">
-             🔙 К поиску
+            🔙 {{t("dynamic.button.prev")}}
         </a>
         <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">
-            🏠 Главное меню
+            🏠 {{t("dynamic.button.menu")}}
         </a>
     </div>
 </div>

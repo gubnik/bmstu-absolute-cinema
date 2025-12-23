@@ -2,21 +2,21 @@
 
 {% block content %}
 <div style="text-align: center; padding: 30px 20px;">
-    <h2 class="menu-label">🎬 Вход в систему</h2>
-    <p class="menu-header-label">Кинотеатр - Информационная система</p>
+    <h2 class="menu-label">🎬 {{t("login.label.top")}}</h2>
+    <p class="menu-header-label">{{t("menu.label.cinema")}}</p>
 
     <div class="form-container">
         <form action="{{ url_for('auth_bp.login_result_handler') }}" method="post">
             <div style="margin: 20px 0;">
-                <label for="login" class="form-label">Логин:</label>
+                <label for="login" class="form-label">{{t("login.label.login")}}</label>
                 <input type="text" id="login" name="login" required
-                       class="form-input" placeholder="Введите ваш логин">
+                class="form-input" placeholder="{{t("login.input.login")}}">
             </div>
 
             <div style="margin: 20px 0;">
-                <label for="password" class="form-label">Пароль:</label>
+                <label for="password" class="form-label">{{t("login.label.password")}}</label>
                 <input type="password" id="password" name="password" required
-                       class="form-input" placeholder="Введите ваш пароль">
+                class="form-input" placeholder="{{t("login.input.password")}}">
             </div>
 
             {% if error_message %}
@@ -27,7 +27,7 @@
 
             <div style="margin: 30px 0;">
                 <button type="submit" class="menu-btn" style="width: 100%;">
-                    🔑 Войти
+                    🔑 {{t("login.button.enter")}}
                 </button>
             </div>
         </form>
