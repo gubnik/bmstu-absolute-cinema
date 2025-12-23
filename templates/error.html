@@ -2,7 +2,7 @@
 
 {% block content %}
 <div style="text-align: center; padding: 50px 20px;">
-    <h2 class="menu-header-label">Ошибка</h2>
+    <h2 class="menu-header-label">{{t("error.label.header")}}</h2>
 
     <div class="msg-error">
         {{ error_message }}
@@ -10,11 +10,11 @@
 
     <div class="navigation">
         <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">
-            Главное меню
+            {{t("navigation.button.main_menu")}}
         </a>
         <br>
         <a href="{{ url_for('auth_bp.logout_handler') }}" class="exit-btn">
-            Выход из системы
+            {{t("navigation.button.exit")}}
         </a>
     </div>
 

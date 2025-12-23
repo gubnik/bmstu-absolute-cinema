@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="{{ url_for('set_locale') }}" method="post" id="locale-form">
+        <form action="{{ url_for('translation_bp.set_locale') }}" method="post" id="locale-form">
             <select class="locale-choice" name="locale" onchange="this.form.submit()">
             {% for loc in locales() %}
                 <option value="{{ loc }}" {% if translator.get_locale() == loc %}selected{% endif %}>{{ loc }}</option>
