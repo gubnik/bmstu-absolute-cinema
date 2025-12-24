@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from decorators import login_required, role_required
+from translation import t
 from .model_route import SessionBrief, model_available_seats, model_get_sessions
 
 available_seats_bp = Blueprint('available_seats_bp', __name__, template_folder='templates')
@@ -24,9 +25,9 @@ def available_seats_result_handler():
     res_info = model_available_seats(session_id)
     if res_info.result:
         return render_template("dynamic.html",
-                               prod_title='💺 Свободные места на сеанс',
+                               prod_title=t("seats.label.header"),
                                products=res_info.result)
     else:
         return render_template("error.html",
-                                error_message=res_info.error_message or "Свободные места не найдены")
+                                error_message=res_info.error_message or t("seats.lable.no_seats"))
 

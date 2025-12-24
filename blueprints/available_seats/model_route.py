@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from translation import t
-from database.select import select_typed 
+from database.select import select_dict, select_typed 
 from database.sql_provider import SQLProvider
 from load_config import load_env_config
 import os
@@ -10,15 +10,6 @@ import os
 class SessionBrief:
     session_id: int
     display_name: str
-
-
-@dataclass
-class TicketBrief:
-    ticket_id: int
-    row_num: int
-    seat_number: int
-    price: str
-    is_sold: str
 
 
 @dataclass
@@ -46,15 +37,12 @@ def model_available_seats(session_id):
     sql_provider: SQLProvider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
     try:
         _sql = sql_provider.get('available_seats.sql')
-        result: list[TicketBrief] = select_typed(TicketBrief, db_config, _sql, session_id)
+        result = select_dict(db_config, _sql, session_id)
         if result:
-            rubles_str = t("global.rubles")
             return SeatsInfoResponse([{
-                "ticket_id": tb.ticket_id,
-                "row_num": tb.row_num,
-                "seat_number": tb.seat_number,
-                "price": f"{tb.price} {rubles_str}",
-                "is_sold": t(f"seats.label.is_sold.{tb.is_sold}")
+                **tb,
+                "price": f'{tb["price"]} {t("global.rubles")}',
+                "is_sold": t(f'seats.label.is_sold.{tb["is_sold"]}')
             } for tb in result], '')
         return SeatsInfoResponse(None, t("seats.label.no_seats"))
     except Exception as e:
