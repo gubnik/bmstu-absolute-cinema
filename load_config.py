@@ -1,7 +1,6 @@
 import json
 import os
 from typing import Any
-from dotenv import load_dotenv
 from dataclasses import dataclass
 
 @dataclass
@@ -31,9 +30,8 @@ def load_config(path: str) -> dict:
     (empty string if the env var is not set). Works recursively for nested
     dicts and lists.
     """
-    load_dotenv(dotenv_path=".env", override=False)
     try:
-        mtime = os.path.getmtime(path)
+        mtime: float = os.path.getmtime(path)
         if path in _configs_mtime_cache and mtime == _configs_mtime_cache[path].mtime:
             return _resolve_env(_configs_mtime_cache[path].data)
         with open(path, "r", encoding="utf-8") as f:
@@ -50,6 +48,5 @@ def load_env_config(env: str) -> dict:
     """
     Loads a config from an env var
     """
-    load_dotenv(dotenv_path=".env", override=False)
-    env_config = os.environ.get(env)
+    env_config: str | None = os.environ.get(env)
     return load_config(env_config) if env_config is not None else {}
