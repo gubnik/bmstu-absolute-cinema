@@ -41,11 +41,27 @@
     "seats.label.is_sold.true": "Sold",
     "seats.button.submit": "Show available seats",
 
+    "films.label.header": "Film search",
+    "films.label.search_by": "Search by",
+    "films.label.search_value": "Search value",
+    "films.label.bad_search": "Bad search criteria",
+    "films.label.no_films": "No films found",
+    "films.input.value": "Enter the value...",
+    "films.button.search": "Search films",
+
     "queries.label.header": "Queries menu",
 
     "halls.label.header": "Halls",
 
     "reports.label.header": "Reports",
+
+    "film_id": "Film ID",
+    "title": "Title",
+    "country": "Country",
+    "year": "Year",
+    "director": "Director",
+    "studio": "Studio",
+    "duration": "Duration",
 
     "ticket_id": "Ticket ID",
     "row_num": "Row number",
