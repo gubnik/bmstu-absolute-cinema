@@ -39,6 +39,3 @@ class Translator:
             return key
         return ts[locale][key]
 
-
-def t(key: str) -> str:
-    return current_app.translator.get_text(key) # pyright: ignore
