@@ -16,6 +16,7 @@ def select_list(db_config: dict, _sql: str, params: Sequence[Any] | None = None)
         else:
             try:
                 if params:
+                    current_app.logger.debug(f"Cursor with params {params} working")
                     cursor.execute(_sql, params)
                 else:
                     cursor.execute(_sql)

@@ -32,7 +32,6 @@ class RedisCache:
             return json.loads(value_js)
         return None
 
-    # Уменьшить счетчик
     def decrement(self, key, field="count", amount=1):
         val = self.get_value(key)
         if val and val.get(field, 0) >= amount:
@@ -41,7 +40,6 @@ class RedisCache:
             return True
         return False
 
-    # Увеличить счетчик
     def increment(self, key, field="count", amount=1):
         val = self.get_value(key)
         if val:
@@ -50,13 +48,11 @@ class RedisCache:
             return True
         return False
 
-    # Получить корзину пользователя
     def get_cart(self, user_id):
         key = f"user:{user_id}:cart"
         cart = self.get_value(key)
         return cart or []
 
-    # Сохранить корзину пользователя
     def set_cart(self, user_id, cart, ttl=3600):
         key = f"user:{user_id}:cart"
         self.set_value(key, cart, ttl)
