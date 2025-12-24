@@ -35,4 +35,6 @@ RUN chown -R appuser:appuser /app
 USER appuser
 
 EXPOSE 6969
-CMD ["gunicorn", "--bind", "0.0.0.0:6969", "app:create_app()", "--workers", "2", "--threads", "4"]
+RUN mkdir /app/logs/ && touch /app/logs/cinema.log
+CMD ["gunicorn", "--bind", "0.0.0.0:6969", "app:create_app()", "--workers", "2", "--threads", "4", \
+    "--capture-output", "--log-level", "DEBUG"]

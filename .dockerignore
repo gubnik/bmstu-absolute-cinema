@@ -1,4 +1,5 @@
 .idea/
+.env
 docs/
 mysql-init/
 *.png

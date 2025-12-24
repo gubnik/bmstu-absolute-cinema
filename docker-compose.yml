@@ -1,5 +1,7 @@
 services:
   web:
+    env_file:
+        - .env
     build: .
     container_name: course-web
     volumes:
