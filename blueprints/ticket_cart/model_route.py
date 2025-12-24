@@ -1,19 +1,11 @@
-import json
-from dataclasses import dataclass
 from database.select import select_dict
 from cache.redis_cache import RedisCache
 from database.DBcm import DBContextManager
 from datetime import date, datetime, timedelta
 from decimal import Decimal
-
 from load_config import load_env_config
-
-
-@dataclass
-class TicketCartResponse:
-    result: list
-    error_message: str
-    status: bool
+from blueprints.model_response import ModelResponse, ResponseOk, ResponseError
+from translation import t
 
 
 def serialize_value(val):
@@ -30,15 +22,14 @@ def serialize_value(val):
     return val
 
 
-def model_get_sessions_for_cart(db_config, sql_provider, cache_config):
+def model_get_sessions_for_cart(db_config, sql_provider, cache_config) -> ModelResponse:
     """Получить список сеансов для выбора"""
     _sql = sql_provider.get('sessions_for_cart.sql')
     result = select_dict(db_config, _sql)
     
     if not result:
-        return TicketCartResponse([], error_message="Сеансы не найдены", status=False)
+        return ResponseError(t("cart.label.no_sessions"))
 
-    # Сохраняем в Redis информацию о сеансах
     redis_conn = RedisCache(cache_config["redis"])
     ttl = cache_config.get("ttl", 3600)
 
@@ -54,25 +45,23 @@ def model_get_sessions_for_cart(db_config, sql_provider, cache_config):
             "session_time": sess.get("session_time"),
             "display_name": sess.get("display_name", "")
         }.items()}
-
         redis_conn.set_value(info_key, info_value, ttl)
 
-    return TicketCartResponse(result, error_message="", status=True)
+    return ResponseOk(result)
 
 
-def model_get_available_tickets(db_config, sql_provider, session_id):
+def model_get_available_tickets(db_config, sql_provider, session_id) -> ModelResponse:
     """Получить список доступных билетов на сеанс"""
     _sql = sql_provider.get('available_tickets.sql')
     result = select_dict(db_config, _sql, (session_id,))
     
     if not result:
-        return TicketCartResponse([], error_message="Свободные билеты не найдены", status=False)
+        return ResponseError(t("cart.label.no_tickets"))
 
     # Сохраняем информацию о билетах в Redis
     cache_config = load_env_config("REDIS_CONFIG")
     redis_conn = RedisCache(cache_config["redis"])
     ttl = cache_config.get("ttl", 3600)
-
     for ticket in result:
         ticket_id = ticket["ticket_id"]
         info_key = f"ticket:{ticket_id}:info"
@@ -87,33 +76,20 @@ def model_get_available_tickets(db_config, sql_provider, session_id):
             "session_info": ticket.get("session_info", ""),
             "is_sold": ticket.get("is_sold", False)
         }.items()}
-
         redis_conn.set_value(info_key, info_value, ttl)
+    return ResponseOk(result)
 
-    return TicketCartResponse(result, error_message="", status=True)
 
-
-def model_sell_tickets(db_config, sql_provider, ticket_ids):
+def model_sell_tickets(db_config, sql_provider, ticket_ids) -> ModelResponse:
     """Продать билеты (пометить как проданные)"""
     with DBContextManager(db_config) as cursor:
         if cursor is None:
-            return TicketCartResponse([], error_message="Ошибка подключения к БД", status=False)
-
+            return ResponseError(t("cart.label.bd_connection_error")) #"Ошибка подключения к БД")
         try:
             _sql = sql_provider.get('sell_ticket.sql')
-            
             for ticket_id in ticket_ids:
                 cursor.execute(_sql, (ticket_id,))
-            
-            return TicketCartResponse(
-                [{'sold_count': len(ticket_ids)}],
-                error_message='',
-                status=True
-            )
-
+            return ResponseOk([{'sold_count': len(ticket_ids)}])
         except Exception as e:
-            return TicketCartResponse(
-                [],
-                error_message=f"Ошибка БД: {str(e)}",
-                status=False
-            )
+            return ResponseError(f'{t("cart.label.bd_general_error")} {str(e)}')
+

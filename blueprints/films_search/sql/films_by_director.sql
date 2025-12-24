@@ -5,7 +5,7 @@ SELECT
     f.year AS year,
     COALESCE(ts.ts_director, f.director) AS director,
     f.studio AS studio,
-    CONCAT(f.duration, '') AS duration
+    COALESCE(CONVERT(f.duration USING utf8mb4), '') AS duration
 FROM 
     cinema.films f
 LEFT JOIN 

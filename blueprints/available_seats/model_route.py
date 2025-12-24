@@ -1,21 +1,17 @@
 from dataclasses import dataclass
 
+from blueprints.model_response import ModelResponse, ResponseError, ResponseOk
 from translation import t
 from database.select import select_dict, select_typed 
 from database.sql_provider import SQLProvider
 from load_config import load_env_config
 import os
 
+
 @dataclass
 class SessionBrief:
     session_id: int
     display_name: str
-
-
-@dataclass
-class SeatsInfoResponse:
-    result: list[dict] | None
-    error_message: str | None
 
 
 def model_get_sessions() -> list[SessionBrief] | None:
@@ -31,7 +27,7 @@ def model_get_sessions() -> list[SessionBrief] | None:
         return None
 
 
-def model_available_seats(session_id):
+def model_available_seats(session_id) -> ModelResponse:
     """Получить свободные места на сеанс"""
     db_config = load_env_config("DB_CONFIG")
     sql_provider: SQLProvider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
@@ -39,12 +35,12 @@ def model_available_seats(session_id):
         _sql = sql_provider.get('available_seats.sql')
         result = select_dict(db_config, _sql, session_id)
         if result:
-            return SeatsInfoResponse([{
+            return ResponseOk([{
                 **tb,
                 "price": f'{tb["price"]} {t("global.rubles")}',
                 "is_sold": t(f'seats.label.is_sold.{tb["is_sold"]}')
-            } for tb in result], '')
-        return SeatsInfoResponse(None, t("seats.label.no_seats"))
+            } for tb in result])
+        return ResponseError(t("seats.label.no_seats"))
     except Exception as e:
-        return SeatsInfoResponse(None, str(e))
+        return ResponseError(str(e))
 

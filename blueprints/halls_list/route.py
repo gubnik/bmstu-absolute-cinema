@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template
-import os
-from database.sql_provider import SQLProvider
-from load_config import load_env_config
+from blueprints.model_response import ModelResponse, ResponseError
 from decorators import login_required, role_required
+from translation import t
 from .model_route import model_halls_list
+from blueprints.model_response import ResponseOk, ResponseError
 
 halls_list_bp = Blueprint('halls_list_bp', __name__, template_folder='templates')
 
@@ -13,22 +13,14 @@ halls_list_bp = Blueprint('halls_list_bp', __name__, template_folder='templates'
 @role_required
 def halls_list_handler():
     """Страница со списком залов"""
-    db_config = load_env_config("DB_CONFIG")
-    provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
     
-    try:
-        res_info = model_halls_list(db_config, provider)
-        
-        if res_info.status and res_info.result:
+    res_info: ModelResponse = model_halls_list()
+    match res_info:
+        case ResponseOk():
             return render_template("dynamic.html",
-                                  prod_title='🏛️ Залы кинотеатра',
-                                  products=res_info.result)
-        else:
+                              prod_title='🏛️ Залы кинотеатра',
+                              products=res_info.result)
+        case ResponseError():
             return render_template("error.html",
-                                  error_message=res_info.error_message or "Залы не найдены")
-    
-    except Exception as e:
-        print(f"Error in halls_list_handler: {e}")
-        return render_template("error.html",
-                              error_message=f"Системная ошибка: {str(e)}")
+                              error_message=res_info.error or t("halls.label.no_halls"))
 

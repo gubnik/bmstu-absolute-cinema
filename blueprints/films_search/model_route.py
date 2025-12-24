@@ -1,17 +1,12 @@
-from dataclasses import dataclass
 from database.select import select_dict
 from database.sql_provider import SQLProvider
 from translation import t, get_locale
 from load_config import load_env_config
+from blueprints.model_response import ModelResponse, ResponseOk, ResponseError
 import os
 
-@dataclass
-class FilmInfoResponse:
-    result: list[dict] | None
-    error_message: str
 
-
-def model_films_search(search_type: str | None, search_value) -> FilmInfoResponse:
+def model_films_search(search_type: str | None, search_value) -> ModelResponse:
     db_config = load_env_config("DB_CONFIG")
     sql_provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
     """Поиск фильмов по разным критериям"""
@@ -26,10 +21,10 @@ def model_films_search(search_type: str | None, search_value) -> FilmInfoRespons
             result = select_dict(db_config, _sql, params=(locale, sanitized_value,))
             chosen_criteria = search_type
         if not chosen_criteria:
-            return FilmInfoResponse(None, t("films.label.bad_search"))
+            return ResponseError(t("films.label.bad_search"))
         if not result:
-            return FilmInfoResponse(None, t("films.label.no_films"))
-        return FilmInfoResponse([{**d, "duration": f'{d["duration"]} {t("global.minutes")}'} for d in result], '')
+            return ResponseError(t("films.label.no_films"))
+        return ResponseOk([{**d, "duration": f'{d["duration"]} {t("global.minutes")}'} for d in result])
     except Exception as e:
-        return FilmInfoResponse(None, str(e))
+        return ResponseError(str(e))
 

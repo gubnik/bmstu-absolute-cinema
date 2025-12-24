@@ -2,7 +2,7 @@ SELECT
     t.ticket_id AS ticket_id,
     t.row_num AS row_num,
     t.seat_number AS seat_number,
-    CONCAT(t.price, '') AS price,
+    COALESCE(CONVERT(t.price USING utf8mb4), '') AS price,
     CASE
         WHEN t.is_sold = 0 THEN "false"
         ELSE "true"
