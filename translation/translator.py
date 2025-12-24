@@ -1,6 +1,4 @@
-from typing import Self
-
-from flask import current_app
+from typing import Any, Self
 
 from translation.locale_holder import LocaleHolder
 from .ts_provider import TranslationProvider
@@ -28,7 +26,7 @@ class Translator:
             self.locale_holder.set_locale(locale)
             return
     
-    def get_text(self: Self, key: str) -> str:
+    def get_text(self: Self, key: str, **kwargs: Any) -> str:
         ts = self.ts_provider.get_all_translations()
         locale = self.locale_holder.get_locale()
         if not locale and ts:
@@ -37,5 +35,5 @@ class Translator:
             return key
         if not key in ts[locale]:
             return key
-        return ts[locale][key]
+        return ts[locale][key].format(**kwargs)
 
