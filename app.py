@@ -1,3 +1,4 @@
+import logging
 import os
 from flask import Flask, render_template
 from markupsafe import Markup
@@ -49,6 +50,10 @@ def create_app() -> CinemaApp:
     translator = Translator(ts_provider, locale_holder)
 
     app = CinemaApp(__name__, translator)
+
+    logger = logging.getLogger("cinema.logger")
+    app.logger.handlers.extend(logger.handlers)
+    app.logger.setLevel(logging.DEBUG)
  
     @app.errorhandler(404)
     def page_not_found(e):
