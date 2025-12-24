@@ -1,5 +1,7 @@
 from dataclasses import fields, is_dataclass
 from typing import Any, Callable, Iterator, Sequence, Type, TypeVar
+
+from flask import current_app
 from database.DBcm import DBContextManager
 from pymysql.err import OperationalError
 
@@ -55,6 +57,7 @@ def iterate_select_typed(cls: Type[T],
             raise RuntimeError("DBContextManager returned no cursor")
 
         if params:
+            current_app.logger.debug(f"Cursor with params {params} working")
             cursor.execute(_sql, params)
         else:
             cursor.execute(_sql)
