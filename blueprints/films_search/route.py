@@ -1,9 +1,7 @@
 from flask import Blueprint, render_template, request
-import os
-from database.sql_provider import SQLProvider
 from decorators import login_required, role_required
+from translation import t
 from .model_route import model_films_search
-from load_config import load_env_config
 
 films_search_bp = Blueprint('films_search_bp', __name__, template_folder='templates')
 
@@ -22,26 +20,14 @@ def films_search_handler():
 def films_search_result_handler():
     """Обработка поиска фильмов"""
     user_data = request.form
-    
-    db_config = load_env_config("DB_CONFIG")
-    provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
-    
     search_type = user_data.get('search_type')
     search_value = user_data.get('search_value', '').strip()
-    
-    try:
-        res_info = model_films_search(db_config, search_type, search_value, provider)
-        
-        if res_info.status and res_info.result:
-            return render_template("dynamic.html",
-                                  prod_title='🎬 Результаты поиска фильмов',
-                                  products=res_info.result)
-        else:
-            return render_template("error.html",
-                                  error_message=res_info.error_message or "Фильмы не найдены")
-    
-    except Exception as e:
-        print(f"Error in films_search_result_handler: {e}")
+    res_info = model_films_search(search_type, search_value)
+    if res_info.result:
+        return render_template("dynamic.html",
+                               prod_title=t("films.label.result"),
+                               products=res_info.result)
+    else:
         return render_template("error.html",
-                              error_message=f"Системная ошибка: {str(e)}")
+                               error_message=res_info.error_message or t("films.label.no_films"))
 

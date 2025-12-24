@@ -1,15 +1,17 @@
 SELECT 
-    f.film_id AS 'ID',
-    f.title AS 'Название',
-    f.country AS 'Страна',
-    f.year AS 'Год',
-    f.director AS 'Режиссёр',
-    f.studio AS 'Студия',
-    CONCAT(f.duration, ' мин.') AS 'Длительность'
-FROM
+    f.film_id AS film_id,
+    COALESCE(ts.ts_title, f.title) AS title,
+    COALESCE(ts.ts_country, f.country) AS country,
+    f.year AS year,
+    COALESCE(ts.ts_director, f.director) AS director,
+    f.studio AS studio,
+    CONCAT(f.duration, '') AS duration
+FROM 
     cinema.films f
-WHERE
+LEFT JOIN 
+    cinema.films_ts ts ON f.film_id = ts.film_id AND ts.locale = %s
+WHERE 
     f.year = %s
-ORDER BY
-    f.title;
+ORDER BY 
+    f.year DESC, f.title;
 
