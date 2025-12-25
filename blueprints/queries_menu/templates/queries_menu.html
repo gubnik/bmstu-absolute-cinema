@@ -2,32 +2,26 @@
 
 {% block content %}
 <div style="text-align: center; padding: 50px 20px;">
-    <h2 class="menu-header-label">🔍 Меню запросов</h2>
+    <h2 class="menu-header-label">🔍 {{"queries.label.header"}}</h2>
 
     <div class="navigation">
-        <h3 class="menu-label">Запросы по фильмам</h3>
-        
         <a href="{{ url_for('films_search_bp.films_search_handler') }}" class="menu-btn">
-            🔎 Поиск фильмов
+            🔎 {{"films.label.header"}}
         </a>
         <hr>
-        
-        <h3 class="menu-label">Билеты</h3>
         
         <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-btn">
-            💺 Свободные места на сеанс
+            💺 {{"seats.label.header"}}
         </a>
         <hr>
         
-        <h3 class="menu-label">Залы</h3>
-        
         <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-btn">
-            🏛️ Список залов
+            🏛️ {{"halls.label.header"}}
         </a>
         <hr>
         
         <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn nav-button" style="margin-top: 30px;">
-            🏠 Главное меню
+            🏠 {{"navigation.button.menu"}}
         </a>
     </div>
 </div>
