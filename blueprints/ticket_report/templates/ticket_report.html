@@ -6,6 +6,13 @@
 
     <div class="form-container margin-top-20">
         <form action="{{ url_for('ticket_report_bp.ticket_report_post_handler') }}" method="post">
+            <label for="report_type" class="form-label">{{t("reports.label.report_of")}}:</label>
+                <select id="report_type" name="report_type" class="form-input" required>
+                    <option value="ticket_count">{{t("reports.option.ticket_count")}}</option>
+                    <option value="total_revenue">{{t("reports.option.total_revenue")}}</option>
+                    <option value="sessions_avgprice">{{t("reports.option.sessions_avgprice")}}</option>
+                    <option value="all">{{t("reports.option.all")}}</option>
+                </select>
             <div class="margin-15-0">
                 <label for="month" class="form-label">{{t("reports.label.month")}}:</label>
                 <input type="number" id="month" name="month" class="form-input" min="1" max="12" required
