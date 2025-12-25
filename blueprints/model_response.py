@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class ResponseOk:
-    result: list
+    result: list[dict]
 
 @dataclass
 class ResponseError:

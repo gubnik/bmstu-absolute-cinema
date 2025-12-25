@@ -2,50 +2,48 @@
 
 {% block content %}
 <div class="text-center padding-20">
-    <h2>🎟️ Отчёт по продажам билетов</h2>
+    <h2 class="menu-header-label">🎟️ {{t("reports.label.header")}}</h2>
 
     <div class="form-container margin-top-20">
         <form action="{{ url_for('ticket_report_bp.ticket_report_post_handler') }}" method="post">
             <div class="margin-15-0">
-                <label for="month" class="form-label">Месяц (1-12):</label>
+                <label for="month" class="form-label">{{t("reports.label.month")}}:</label>
                 <input type="number" id="month" name="month" class="form-input" min="1" max="12" required
                        value="{{ form_data.month if form_data else '' }}">
             </div>
 
             <div class="margin-15-0">
-                <label for="year" class="form-label">Год (например 2024):</label>
+                <label for="year" class="form-label">{{t("reports.label.year")}}:</label>
                 <input type="number" id="year" name="year" class="form-input" min="1900" max="2100" required
                        value="{{ form_data.year if form_data else '' }}">
             </div>
 
             <div class="btn-group">
-                <button type="submit" name="action" value="add" class="group-btn">📝 Сформировать отчёт</button>
-                <button type="submit" name="action" value="get" class="group-btn">📄 Получить отчёт</button>
+                <button type="submit" name="action" value="add" class="group-btn">📝 {{t("reports.button.form_report")}}</button>
+                <button type="submit" name="action" value="get" class="group-btn">📄 {{t("reports.button.show_report")}}</button>
             </div>
         </form>
 
         <div style="margin-top: 15px; padding: 10px; background: white; border-radius: 5px;">
             <p style="color: black; font-size: 14px; margin: 0;">
-                💡 <b>Сформировать</b> - создаёт/обновляет отчёт на основе данных о продажах за период<br>
-                💡 <b>Получить</b> - показывает ранее сформированный отчёт
+            💡 <b>{{t("reports.label.form")}}</b> - {{t("case.label.form_hint")}}
+            💡 <b>{{t("reports.label.show")}}</b> - {{t("case.label.show_hint")}}
             </p>
         </div>
 
-        {% if error_message %}
-            <div class="msg-error">
-                {{ error_message }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="msg-{{category}}">
+                {{ message }}
             </div>
+        {% endfor %}
         {% endif %}
-
-        {% if success_message %}
-            <div class="msg-ok">
-                ✅ {{ success_message }}
-            </div>
-        {% endif %}
+        {% endwith %}
     </div>
 
     <div class="navigation margin-top-20">
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">🏠 Главное меню</a>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">🏠 {{t("navigation.button.menu")}}</a>
     </div>
 </div>
 {% endblock %}

@@ -1,2 +1,1 @@
-CALL cinema.AddTicketReport(%s, %s, @p_error_message);
-
+CALL cinema.AddTicketReport(%s, %s, @p_success);

@@ -90,6 +90,18 @@
     "cart.msg.cart_cleared": "Cart was cleared",
 
     "reports.label.header": "Reports",
+    "reports.label.month": "Month (1-12)",
+    "reports.label.year": "Year (>1900)",
+    "reports.label.form": "Form",
+    "reports.label.show": "Show",
+    "reports.button.form_report": "Form the report",
+    "reports.button.show_report": "Show the report",
+    "reports.label.success": "Successfuly added a report",
+    "reports.label.system_error": "System error: {cause}",
+    "reports.label.db_general_error": "DB error: {cause}",
+    "reports.label.db_connection_error": "DB connection error",
+    "reports.label.no_data": "No data available for this period",
+    "reports.label.general_report_title": "Report for {month}/{year}",
 
     "film_id": "Film ID",
     "title": "Title",

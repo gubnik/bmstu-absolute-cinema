@@ -9,10 +9,12 @@
     </div>
 
     <div class="navigation">
-        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">
-            {{t("navigation.button.main_menu")}}
+        <a href="javascript:history.back()" class="menu-btn">
+            🔙 {{t("navigation.button.prev")}}
         </a>
-        <br>
+        <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn">
+            🏠 {{t("navigation.button.menu")}}
+        </a>
         <a href="{{ url_for('auth_bp.logout_handler') }}" class="exit-btn">
             {{t("navigation.button.exit")}}
         </a>
