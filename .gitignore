@@ -12,3 +12,4 @@ package-lock.json
 static/css/output.css
 **/.~lock*
 **/build/**
+docs/**/.*
