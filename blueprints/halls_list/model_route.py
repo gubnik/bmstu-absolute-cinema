@@ -1,12 +1,12 @@
 from database.select import select_dict
 from translation import get_locale, t
-from blueprints.model_response import ModelResponse, ResponseOk, ResponseError
+from blueprints.model_response import Result, Ok, Error
 from database.sql_provider import SQLProvider
 from load_config import load_env_config
 import os
 
 
-def model_halls_list() -> ModelResponse:
+def model_halls_list() -> Result[list[dict], str]:
     """Получить список залов с информацией"""
     db_config = load_env_config("DB_CONFIG")
     sql_provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
@@ -14,11 +14,11 @@ def model_halls_list() -> ModelResponse:
         _sql = sql_provider.get('halls_list.sql')
         result = select_dict(db_config, _sql, params=(get_locale(),))
         if result:
-            return ResponseOk([{
+            return Ok([{
                 **hp,
                 "price_range": f'{hp["price_range"]} {t("global.rubles")}'
             } for hp in result])
-        return ResponseError(t("halls.label.no_halls"))
+        return Error(t("halls.label.no_halls"))
     except Exception as e:
-        return ResponseError(str(e))
+        return Error(str(e))
 

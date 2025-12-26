@@ -1,3 +1,3 @@
-from .model_response import ModelResponse
+from .model_response import Result, Ok, Error
 
-__all__ = ["ModelResponse"]
+__all__ = ["Result", "Ok", "Error"]

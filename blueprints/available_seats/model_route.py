@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from blueprints.model_response import ModelResponse, ResponseError, ResponseOk
+from blueprints.model_response import Error, Ok, Result
 from translation import t
 from database.select import select_dict, select_typed 
 from database.sql_provider import SQLProvider
@@ -27,7 +27,7 @@ def model_get_sessions() -> list[SessionBrief] | None:
         return None
 
 
-def model_available_seats(session_id) -> ModelResponse:
+def model_available_seats(session_id) -> Result[list[dict], str]:
     """Получить свободные места на сеанс"""
     db_config = load_env_config("DB_CONFIG")
     sql_provider: SQLProvider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
@@ -35,12 +35,12 @@ def model_available_seats(session_id) -> ModelResponse:
         _sql = sql_provider.get('available_seats.sql')
         result = select_dict(db_config, _sql, session_id)
         if result:
-            return ResponseOk([{
+            return Ok([{
                 **tb,
                 "price": f'{tb["price"]} {t("global.rubles")}',
                 "is_sold": t(f'seats.label.is_sold.{tb["is_sold"]}')
             } for tb in result])
-        return ResponseError(t("seats.label.no_seats"))
+        return Error(t("seats.label.no_seats"))
     except Exception as e:
-        return ResponseError(str(e))
+        return Error(str(e))
 

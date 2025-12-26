@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from blueprints.model_response import ResponseError, ResponseOk
+from blueprints.model_response import Error, Ok
 from decorators import login_required, role_required
 from translation import t
 from .model_route import SessionBrief, model_available_seats, model_get_sessions
@@ -25,11 +25,11 @@ def available_seats_result_handler():
     session_id = user_data.get('session_id')
     res_info = model_available_seats(session_id)
     match res_info:
-        case ResponseOk():
+        case Ok():
             return render_template("dynamic.html",
                                prod_title=t("seats.label.header"),
                                products=res_info.result)
-        case ResponseError():
+        case Error():
             return render_template("error.html",
                                 error_message=res_info.error or t("seats.lable.no_seats"))
 

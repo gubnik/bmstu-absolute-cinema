@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from blueprints.model_response import ResponseError, ResponseOk
+from blueprints.model_response import Ok, Error
 from decorators import login_required, role_required
 from translation import t
 from .model_route import model_films_search
@@ -25,11 +25,11 @@ def films_search_result_handler():
     search_value = user_data.get('search_value', '').strip()
     res_info = model_films_search(search_type, search_value)
     match res_info:
-        case ResponseOk():
+        case Ok():
             return render_template("dynamic.html",
                                prod_title=t("films.label.result"),
                                products=res_info.result)
-        case ResponseError():
+        case Error():
             return render_template("error.html",
                                error_message=res_info.error or t("films.label.no_films"))
 
