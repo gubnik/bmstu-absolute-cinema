@@ -1,12 +1,16 @@
 from dataclasses import dataclass
+from typing import Generic, TypeVar
 
+T = TypeVar("T")
+E = TypeVar("E")
 
 @dataclass
-class ResponseOk:
-    result: list[dict]
+class Ok(Generic[T]):
+    result: T
 
 @dataclass
-class ResponseError:
-    error: str
+class Error(Generic[E]):
+    error: E
 
-ModelResponse = ResponseOk | ResponseError
+Result = Ok[T] | Error[E]
+
