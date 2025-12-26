@@ -53,7 +53,7 @@ def ticket_cart_get():
                             sessions=res_sessions.result, 
                             tickets=tickets,
                             cart=res_cart.result.cart,
-                            total_sum=sum(item.get('price', 0) for item in res_cart.result.cart),
+                            total_sum=res_cart.result.total,
                             cart_ids=cart_ids)
             
 

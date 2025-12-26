@@ -74,8 +74,6 @@
     <!-- Список билетов -->
     {% if session.selected_session_id and tickets %}
     <div class="session-ticket-container">
-        <h3 class="menu-label mb-5">💺 Свободные места</h3>
-        <hr>
         {% set grouped = {} %}
         {% for ticket in tickets %}
             {% set _ = grouped.setdefault(ticket.row_num, []) %}
@@ -132,7 +130,7 @@
     <!-- Корзина билетов -->
     <div class="cart-container">
         <h2 class="menu-label">
-            🛒 Корзина {% if cart %}({{ cart|length }} бил.){% endif %}
+            🛒 {{t("cart.label.cart")}} {% if cart %}({{ cart|length }} бил.){% endif %}
         </h2>
         
         {% if cart %}
@@ -153,7 +151,7 @@
                             <td style="padding: 10px; text-align: left;">{{ item.film_title }}</td>
                             <td style="padding: 10px; text-align: center;">{{ item.row_num }}</td>
                             <td style="padding: 10px; text-align: center;">{{ item.seat_number }}</td>
-                            <td style="padding: 10px; text-align: right;">{{ item.price }} {{"global.rubles"}}.</td>
+                            <td style="padding: 10px; text-align: right;">{{ item.price }} {{t("global.rubles")}}.</td>
                             <td style="padding: 10px; text-align: right; margin-right: 10px;">
                                 <form method="post" action="{{ url_for('ticket_cart_bp.remove_ticket_from_cart', ticket_id=item.ticket_id) }}" style="margin: 0;">
                                     <button type="submit" class="cart-remove-btn">

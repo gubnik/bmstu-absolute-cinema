@@ -2,26 +2,26 @@
 
 {% block content %}
 <div style="text-align: center; padding: 50px 20px;">
-    <h2 class="menu-header-label">🔍 {{"queries.label.header"}}</h2>
+    <h2 class="menu-header-label">🔍 {{t("queries.label.header")}}</h2>
 
     <div class="navigation">
         <a href="{{ url_for('films_search_bp.films_search_handler') }}" class="menu-btn">
-            🔎 {{"films.label.header"}}
+            🔎 {{t("films.label.header")}}
         </a>
         <hr>
         
         <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-btn">
-            💺 {{"seats.label.header"}}
+            💺 {{t("seats.label.header")}}
         </a>
         <hr>
         
         <a href="{{ url_for('halls_list_bp.halls_list_handler') }}" class="menu-btn">
-            🏛️ {{"halls.label.header"}}
+            🏛️ {{t("halls.label.header")}}
         </a>
         <hr>
         
         <a href="{{ url_for('menu_bp.main_menu') }}" class="menu-btn nav-button" style="margin-top: 30px;">
-            🏠 {{"navigation.button.menu"}}
+            🏠 {{t("navigation.button.menu")}}
         </a>
     </div>
 </div>

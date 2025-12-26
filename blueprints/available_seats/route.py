@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from blueprints.model_response import Error, Ok
 from decorators import login_required, role_required
 from translation import t
-from .model_route import SessionBrief, model_available_seats, model_get_sessions
+from .model_route import model_available_seats, model_get_sessions
 
 available_seats_bp = Blueprint('available_seats_bp', __name__, template_folder='templates')
 
@@ -12,8 +12,12 @@ available_seats_bp = Blueprint('available_seats_bp', __name__, template_folder='
 @role_required
 def available_seats_handler():
     """Страница выбора сеанса для просмотра свободных мест"""
-    sessions: list[SessionBrief] | None = model_get_sessions()
-    return render_template("available_seats.html", sessions=sessions)
+    sessions_result = model_get_sessions()
+    match sessions_result:
+        case Ok():
+            return render_template("available_seats.html", sessions=sessions_result.result)
+        case Error():
+            return render_template("error.html", error_message=sessions_result.error)
 
 
 @available_seats_bp.route('/available_seats', methods=['POST'])

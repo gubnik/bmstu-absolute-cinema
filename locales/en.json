@@ -39,6 +39,7 @@
     "seats.label.is_sold.false": "Free",
     "seats.label.is_sold.true": "Sold",
     "seats.button.submit": "Show available seats",
+    "seats.label.system_error": "System error: {cause}",
 
     "films.label.header": "Film search",
     "films.label.search_by": "Search by",
@@ -68,6 +69,7 @@
     "cart.label.added": "Added",
     "cart.label.remove": "Remove",
     "cart.label.sold": "Sold",
+    "cart.label.cart": "Cart",
     "cart.label.seats_available": "Seats available",
     "cart.label.no_sessions_available": "No sessions with available tickets",
     "cart.label.no_tickets_available": "No tickets available for this session",
@@ -108,6 +110,8 @@
     "reports.label.db_connection_error": "DB connection error",
     "reports.label.no_data": "No data available for this period",
     "reports.label.general_report_title": "Report for {month}/{year}",
+    "reports.label.form_hint": "Forms a monthly report for a period",
+    "reports.label.show_hint": "Shows the report, if any",
 
     "film_id": "Film ID",
     "title": "Title",

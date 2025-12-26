@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta
 from decimal import Decimal
 from database.sql_provider import SQLProvider
 from blueprints.model_response import Result, Ok, Error
-from translation import t
+from translation import get_locale, t
 
 
 def _serialize_redis_value(val):
@@ -26,7 +26,7 @@ def _serialize_redis_value(val):
 def model_get_sessions_for_cart(db_config: dict, redis_cache: RedisCache, ttl: float, sql_provider: SQLProvider) -> Result[list[dict], str]:
     """Получить список сеансов для выбора"""
     _sql = sql_provider.get('sessions_for_cart.sql')
-    result = select_dict(db_config, _sql)
+    result = select_dict(db_config, _sql, get_locale())
     
     if not result:
         return Error(t("cart.label.no_sessions"))
@@ -53,7 +53,7 @@ def model_get_available_tickets(db_config: dict, redis_cache: RedisCache, ttl: f
         return Error(t("cart.label.no_sessions"))
     """Получить список доступных билетов на сеанс"""
     _sql = sql_provider.get('available_tickets.sql')
-    result = select_dict(db_config, _sql, (session_id,))
+    result = select_dict(db_config, _sql, (get_locale(), session_id,))
     
     if not result:
         return Error(t("cart.label.no_tickets"))
