@@ -88,6 +88,7 @@
     "cart.msg.cart_sold": "Sold {ticket_num} tickets for total of {total_sum} {currency}",
     "cart.msg.no_user": "No such user found",
     "cart.msg.cart_cleared": "Cart was cleared",
+    "cart.msg.system_error": "System error: {cause}",
 
     "reports.label.header": "Reports",
     "reports.label.month": "Month (1-12)",
