@@ -53,7 +53,7 @@ class RedisCache:
         cart = self.get_value(key)
         return cart or []
 
-    def set_cart(self, user_id, cart, ttl=3600):
+    def set_cart(self, user_id, cart, ttl: float = 3600):
         key = f"user:{user_id}:cart"
         self.set_value(key, cart, ttl)
 
