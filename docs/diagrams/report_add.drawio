@@ -1,9 +1,15 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Page-1" id="DqT0L8bcXAD3aTs5tjLg">
-    <mxGraphModel dx="2066" dy="1249" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="900" math="0" shadow="0" adaptiveColors="none">
+    <mxGraphModel dx="1626" dy="975" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="900" math="0" shadow="0" adaptiveColors="none">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="v3BdYobPpchBDHiNAmov-1" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="888" as="sourcePoint" />
+            <mxPoint x="630" y="13" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="DM_JxgKuVuJx3bZMxFUk-1" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="45" y="15" width="30" height="60" as="geometry" />
         </mxCell>
@@ -32,7 +38,7 @@
           <mxGeometry x="290" y="30" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="DM_JxgKuVuJx3bZMxFUk-7" value="Model" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=18;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="670" y="30" width="60" height="30" as="geometry" />
+          <mxGeometry x="470" y="30" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="DM_JxgKuVuJx3bZMxFUk-8" value="route" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="280" y="80" width="80" height="360" as="geometry" />
@@ -71,7 +77,7 @@
             <mxPoint x="639" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DM_JxgKuVuJx3bZMxFUk-17" value="Параметры&lt;div&gt;запроса&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-16" vertex="1" connectable="0">
+        <mxCell id="DM_JxgKuVuJx3bZMxFUk-17" value="Имя запроса" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-16" vertex="1" connectable="0">
           <mxGeometry x="-0.3667" y="-2" relative="1" as="geometry">
             <mxPoint x="15" y="-2" as="offset" />
           </mxGeometry>
@@ -96,7 +102,7 @@
             <mxPoint x="640" y="319.65999999999997" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DM_JxgKuVuJx3bZMxFUk-24" value="SQL-запрос" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-23" vertex="1" connectable="0">
+        <mxCell id="DM_JxgKuVuJx3bZMxFUk-24" value="SQL-запрос,&lt;div&gt;параметры&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-23" vertex="1" connectable="0">
           <mxGeometry x="0.0881" y="1" relative="1" as="geometry">
             <mxPoint x="-4" as="offset" />
           </mxGeometry>
