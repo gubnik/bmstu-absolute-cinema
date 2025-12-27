@@ -8,6 +8,7 @@
     "dynamic.label.none": "Records not found",
 
     "error.label.header": "Error occured",
+    "error.label.bad_role": "Lacking role to view the page. You are: {role}",
 
     "navigation.button.prev": "Go back",
     "navigation.button.menu": "Main menu",

@@ -24,14 +24,17 @@
     {% endif %}
 
     <div class="navigation">
+        
         {% if session.user and session.user.role in ['cashier', 'manager', 'admin'] %}
         
         <p class="menu-label">🎟️ {{t("menu.section.tickets")}}</p>
         <a href="{{ url_for('ticket_cart_bp.ticket_cart_get') }}" class="menu-btn">
             {{t("cart.label.header")}}
         </a>
+        <a href="{{ url_for('available_seats_bp.available_seats_handler') }}" class="menu-btn">
+            {{t("seats.label.header")}}
+        </a>
         <hr>
-        
         {% endif %}
 
         {% if session.user and session.user.role in ['manager', 'admin'] %}

@@ -312,12 +312,7 @@ UML диаграмма вариантов использования. Кажды
     \label{fig:report_menu}
 \end{figure}
 
-\paragraph{Требования в шаблонам html:}
-\begin{itemize}
-    \item Шаблон содержит форму типа select для ввода типа отчета
-    \item Шаблон содержит форму типа input для ввода начальной и конечной дат.
-    \item Шаблон содержит динамический блок информации с сообщением от системы.
-\end{itemize}
+
 
 \subsection*{Создание отчета}
 \paragraph{Предусловия:} пользователю авторизирован в качестве внутреннего пользователя.
@@ -370,14 +365,25 @@ UML диаграмма вариантов использования. Кажды
     \label{fig:fs_report}
 \end{figure}
 
+\paragraph{Требования в шаблонам html:} Динамический шаблон "Меню отчетов"
+\begin{itemize}
+    \item Шаблон содержит форму типа select для ввода типа отчета:
+        \begin{itemize}
+            \item По суммарной прибыли
+            \item По количеству проданных билетов
+            \item По средней цене билета за сеанс
+        \end{itemize}
+    \item Шаблон содержит форму типа input для ввода начальной и конечной дат.
+    \item Шаблон содержит динамический блок информации с сообщением от системы.
+\end{itemize}
+
 \clearpage
 \section*{Продажа билетов}
 Бизнес-процесс создан для внешней группы пользователей.
 \paragraph{Предусловия:} пользователь (кассир) успешно авторизировался в
 информационной системе и обладает соответствующими правами доступа к данному
 варианту использования.
-\paragraph{Гарантия:} пользователь получает возможность выбрать причал, к которому
-пришвартован корабль выбрать и завербовать сотрудников порта.
+\paragraph{Гарантия:} пользователь получает возможность выбрать сеанс и купить билеты на места на сеанс.
 \paragraph{Минимальная гарантия:} пользователь получит сообщение, о том, что произошла
 ошибка, и кнопку для возврата в главное меню.
 \paragraph{Сценарий набора команды:}
@@ -394,7 +400,13 @@ UML диаграмма вариантов использования. Кажды
 
 \paragraph{Исключения:}
 \begin{enumerate}[start=1,label=\arabic*A.]
-    \item Пользователь не авторизован или не имеет соответсвующих прав
+    \item Пользователь не авторизован
+\end{enumerate}
+\begin{enumerate}[start=1,label=\arabic*B.]
+    \item Пользователь не имеет прав доступа
+\end{enumerate}
+\begin{enumerate}[start=3,label=\arabic*A.]
+    \item На сеанс нет свободных мест
 \end{enumerate}
 \begin{enumerate}[start=7,label=\arabic*A.]
     \item Билет был куплен другим пользователем после выбора
@@ -432,7 +444,7 @@ UML диаграмма вариантов использования. Кажды
 
 
 \section*{Логическая модель базы данных}
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -444,7 +456,7 @@ PK &  &  &  \\
 \caption{users}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -456,7 +468,7 @@ PK &  &  &  \\
 \caption{halls}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -468,9 +480,9 @@ PK & FK &  &  \\
 \caption{halls_ts}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
-\begin{tabular}{|c|c|c|c|c|c}
+\begin{tabular}{|c|c|c|c|c|c|}
 \hline
 schema_id & hall_id & row_num & start_seat & end_seat & base_price \\
 \hline
@@ -480,7 +492,7 @@ PK & FK &  &  &  &  \\
 \caption{hall_schema}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
@@ -492,7 +504,7 @@ PK &  &  &  &  &  &  &  \\
 \caption{films}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
@@ -504,7 +516,7 @@ PK & FK &  &  &  &  &  \\
 \caption{films_ts}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
@@ -516,7 +528,7 @@ PK & FK & FK &  &  &  \\
 \caption{sessions}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
@@ -528,7 +540,7 @@ PK & FK &  &  &  &  &  \\
 \caption{tickets}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -540,7 +552,7 @@ PK &  &  &  &  \\
 \caption{ticket_count_reports}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -552,7 +564,7 @@ PK &  &  &  &  \\
 \caption{total_revenue_reports}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[ht]\small
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline

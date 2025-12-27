@@ -8,6 +8,7 @@
     "dynamic.label.none": "Записи не найдены",
 
     "error.label.header": "Произошла ошибка",
+    "error.label.bad_role": "Недостаточная роль для просмотра страницы. Ваша роль: {role}",
 
     "navigation.button.prev": "Назад",
     "navigation.button.menu": "Главное меню",

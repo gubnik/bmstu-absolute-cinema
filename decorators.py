@@ -3,6 +3,7 @@ from typing import Callable
 from flask import session, redirect, url_for, render_template
 import json
 import os
+from translation import t
 
 
 def load_role_config():
@@ -51,7 +52,7 @@ def role_required(f: Callable) -> Callable:
             return f(*args, **kwargs)
         else:
             return render_template("error.html",
-                                   error_message=f"Доступ запрещен. Недостаточно прав. Вы {user_role}(("), 403
+                                   error_message=t("error.label.bad_role", role=user_role)), 403
 
     return decorated_function
 

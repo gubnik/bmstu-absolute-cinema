@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Page-1" id="DqT0L8bcXAD3aTs5tjLg">
-    <mxGraphModel dx="2513" dy="1507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1900" math="0" shadow="0" adaptiveColors="none">
+    <mxGraphModel dx="1382" dy="829" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1900" math="0" shadow="0" adaptiveColors="none">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -307,10 +307,10 @@
             <mxPoint x="990" y="1730" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MsiDJjGxcOWOd94EIt2d-11" value="Данные отсутствуют" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="MsiDJjGxcOWOd94EIt2d-11" value="На сеанс нет свободных мест" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="260" y="1740" width="120" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="MsiDJjGxcOWOd94EIt2d-12" value="Сообщение об ошибке в статической error.html" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="MsiDJjGxcOWOd94EIt2d-12" value="Сообщение об ошибке" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="85" y="1790" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="MsiDJjGxcOWOd94EIt2d-13" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
@@ -831,16 +831,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="KLApPIYFR6Do9HToiCiJ-7" value="" style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="60" y="1540" as="sourcePoint" />
-            <mxPoint x="30" y="1190" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="KLApPIYFR6Do9HToiCiJ-8" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+        <mxCell id="bggZagUgl9GqkpFnkOdb-1" value="" style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="60" y="1370" as="sourcePoint" />
-            <mxPoint x="30" y="1370" as="targetPoint" />
+            <mxPoint x="30" y="1190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
