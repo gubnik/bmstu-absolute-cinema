@@ -3,3 +3,5 @@
 *.out
 *.toc
 *.pdf
+**/*.png
+!img/*.png

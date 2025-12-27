@@ -33,6 +33,7 @@
 \setdefaultlanguage{russian}
 
 \begin{document}
+\include{titlepage}
 \tableofcontents
 \clearpage
 
@@ -141,7 +142,13 @@ UML диаграмма вариантов использования. Кажды
 \begin{figure}[h!]
     \includegraphics[width=\linewidth]{build/img/main_menu.png}
     \caption{UML-диаграмма главного меню}
-    \label{fig:scenarios}
+    \label{fig:main_menu}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/main_menu.png}
+    \caption{Програмная архитектура варианта использования}
+    \label{fig:fs_main_menu}
 \end{figure}
 
 \paragraph{Требования к шаблонам HTML:} Динамический шаблон «Главное меню».
@@ -154,8 +161,407 @@ UML диаграмма вариантов использования. Кажды
     \item На контроллер бизнес-процесса (адрес «blueprints/ticket_cart»)
     \item На выход из системы (адрес «/logout»)
 \end{itemize}
-\clearpage
 
-\section*{}
+\clearpage
+\section*{Авторизация}
+Авторизация создана для групп пользователей: внешних (кассиры) и
+внутренних (администраторы и менеджеры).
+
+У этих групп разные права доступа к остальным вариантам использования.
+Внутренние пользователи имеют доступ к работе с запросами и работе с отчетами,
+внешние пользователи имеют доступ к запросам и бизнес-процессу.
+\paragraph{Предусловия:} пользователю передана форма для ввода логина и пароля.
+\paragraph{Гарантия:} пользователь вошел в систему и получил соответствующую роль.
+\paragraph{Минимальная гарантия:} пользователь получил сообщение, о неверно введенном
+логине или пароле, и кнопку для продолжения работы.
+\paragraph{Сценарий работы авторизации:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система присылает форму для ввода логина и пароля;
+    \item Пользователь вводит данные;
+    \item Система получает данные из формы;
+    \item Система успешно производит аутентификацию и выдает пользователю главноe меню
+\end{enumerate}
+\paragraph{Исключения:}
+\begin{enumerate}[start=5,label=\arabic*A.]
+    \item Пользователь ввел неверные данные
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{build/img/auth.png}
+    \caption{UML-диаграмма авторизации}
+    \label{fig:auth}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/auth.png}
+    \caption{Програмная архитектура варианта использования}
+    \label{fig:fs_auth}
+\end{figure}
+
+\paragraph{Требования к шаблонам html:} Динамический шаблон «Авторизация».
+Шаблон предназначен для ввода идентификационных данных пользователя и
+последующей авторизации в системе.
+Шаблон содержит два поле типа input для ввода логина и пароля. Обе формы
+являются обязательными для заполнения.
+Под формами должна располагаться кнопка «Войти» типа submit, осуществляющая
+передачу данных на сервер с последующей проверкой успешной авторизации.
+Шаблон содержит динамическую вставку для сообщения об ошибке, если имеется
+сообщение об ошибке.
+
+\clearpage
+\section*{Работа с запросами}
+\subsection*{Меню запросов}
+Работа с запросами предназначена для внешних и внутренних пользователей.
+\paragraph{Предусловия:} пользователю выдана главная страница.
+\paragraph{Гарантия:} пользователь перешел на страницу «Меню запросов».
+\paragraph{Минимальная гарантия:} пользователь получил сообщение, если у него не хватает
+прав доступа или он не авторизирован, и кнопку для продолжения работы.
+\paragraph{Сценарий работы меню запросов:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система присылает меню запросов.
+\end{enumerate}
+Исключения:
+\begin{enumerate}[start=2,label=\arabic*A.]
+    \item У пользователя не хватает прав для работы с запросами
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{build/img/queries_menu.png}
+    \caption{UML-диаграмма меню запросов}
+    \label{fig:queries_menu}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/queries_menu.png}
+    \caption{Програмная архитектура варианта использования}
+    \label{fig:fs_queris_menu}
+\end{figure}
+
+\paragraph{Требования к шаблонам HTML:} Динамический шаблон «Меню запросов».
+Шаблон показывает меню запросов со всеми пунктами – различными типами запросов.
+Шаблон содержит ссылки:
+\begin{itemize}
+    \item На контроллер запросов поиска фильмов (адрес «blueprints/films_search»)
+    \item На контроллер запросов доступных мест (адрес «blueprints/available_seats»)
+    \item На контроллер запросов списка залов (адрес «blueprints/halls_list»)
+    \item На контроллер главного меню (адрес «/»)
+\end{itemize}
+
+\clearpage
+\subsection*{Запросы}
+Работа с запросами предназначена для внешних и внутренних пользователей.
+\paragraph{Предусловия:} пользователь авторизированф и имеет права для работы с запросами.
+\paragraph{Гарантия:} пользователь получает результат запроса.
+\paragraph{Минимальная гарантия:} пользователь получил сообщение, если в БД не было
+данных в результате выполнения запроса или пользователь некорректно ввел
+данные, и кнопку для продолжения работы.
+\paragraph{Сценарий использования:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система выдает форму для ввода для параметров;
+    \item Пользователь производит ввод;
+    \item Система выполняет запрос и возвращает пользователю страницу с
+        результатом данного запроса в виде таблицы.
+\end{enumerate}
+\paragraph{Исключения:}
+\begin{enumerate}[start=3,label=\arabic*A.]
+    \item Пользователь ввёл некорректные данные, и система выдаёт сообщение об
+        ошибочном вводе пользователю и кнопку возврата к главному меню или
+        попробовать заново;
+    \item Пользователь ввёл данные, которых нет в БД, и система оповещает об
+        отсутствии информации по данному запросу и предоставляет кнопку возврата к
+        главному меню или попробовать заново.
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{build/img/query.png}
+    \caption{UML-диаграмма запроса}
+    \label{fig:query}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/query.png}
+    \caption{Програмная архитектура варианта использования}
+    \label{fig:fs_query}
+\end{figure}
+
+\clearpage
+\section*{Работа с отчетами}
+\subsection*{Меню работы с отчетами}
+Работа с отчётами предназначена для внутренних пользователей.
+\paragraph{Предусловия:} пользователю выдана главная страница с кнопками просмотра отчёта
+и запроса отчёта.
+\paragraph{Гарантия:} пользователь перешел на страницу «Меню отчётов».
+\paragraph{Минимальная гарантия:} пользователь получил сообщение, если у него не хватает
+прав доступа или он не авторизирован, и кнопку для продолжения работы.
+\paragraph{Сценарий работы меню отчётов:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система присылает меню отчётов.
+\end{enumerate}
+\paragraph{Исключения:}
+\begin{enumerate}[start=3,label=\arabic*A.]
+    \item У пользователя не хватает прав для работы с отчётами
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{build/img/report_menu.png}
+    \caption{UML-диаграмма меню работы с отчетами}
+    \label{fig:report_menu}
+\end{figure}
+
+\paragraph{Требования в шаблонам html:}
+\begin{itemize}
+    \item Шаблон содержит форму типа select для ввода типа отчета
+    \item Шаблон содержит форму типа input для ввода начальной и конечной дат.
+    \item Шаблон содержит динамический блок информации с сообщением от системы.
+\end{itemize}
+
+\subsection*{Создание отчета}
+\paragraph{Предусловия:} пользователю авторизирован в качестве внутреннего пользователя.
+\paragraph{Гарантия:} при наличии прав доступа пользователь может создать отчёт или
+запросить его.
+\paragraph{Минимальная гарантия:} будет выводиться сообщение об ошибке.
+\paragraph{Сценарий использования:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система выдаёт форму для ввода параметров начальной и конечной даты;
+    \item Пользователь вводит данные;
+    \item Система получает данные, выполняет процедуру и возвращает пользователю информационное сообщение.
+\end{enumerate}
+\paragraph{Исключения:}
+\begin{enumerate}[start=4,label=\arabic*A.]
+    \item Отчёт за данный период уже сформирован.
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{build/img/report_add.png}
+    \caption{UML-диаграмма создания отчета}
+    \label{fig:report_add}
+\end{figure}
+
+\subsection*{Просмотр отчета}
+\paragraph{Предусловия:} пользователю авторизирован в качестве внутреннего пользователя.
+\paragraph{Гарантия:} при наличии прав доступа пользователь может просмотреть отчет.
+\paragraph{Минимальная гарантия:} будет выводиться сообщение об ошибке.
+\paragraph{Сценарий использования:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система выдаёт форму для ввода параметров начальной и конечной даты;
+    \item Пользователь вводит данные;
+    \item Система получает данные, выполняет запрос и возвращает пользователю результат в виде таблицы.
+\end{enumerate}
+\paragraph{Исключения:}
+\begin{enumerate}[start=4,label=\arabic*A.]
+    \item Отчёт за данный период не сформирован.
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{build/img/report_view.png}
+    \caption{UML-диаграмма просмотра отчета}
+    \label{fig:report_view}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/report.png}
+    \caption{Програмная архитектура варианта использования}
+    \label{fig:fs_report}
+\end{figure}
+
+\clearpage
+\section*{Продажа билетов}
+Бизнес-процесс создан для внешней группы пользователей.
+\paragraph{Предусловия:} пользователь (кассир) успешно авторизировался в
+информационной системе и обладает соответствующими правами доступа к данному
+варианту использования.
+\paragraph{Гарантия:} пользователь получает возможность выбрать причал, к которому
+пришвартован корабль выбрать и завербовать сотрудников порта.
+\paragraph{Минимальная гарантия:} пользователь получит сообщение, о том, что произошла
+ошибка, и кнопку для возврата в главное меню.
+\paragraph{Сценарий набора команды:}
+\begin{enumerate}
+    \item Пользователь запускает сценарий;
+    \item Система присылает форму для выбора сеанса;
+    \item Пользователь выбирает сеанс;
+    \item Система присылает форму с доступными местами на сеанс;
+    \item Пользователь выбирает билеты из доступных;
+    \item Пользователь отправляет данные системе, выбранные билеты система заносит в Redis;
+    \item Пользователь нажимает кнопку «Оформить покупку» и отправляет данные системе, система передаёт данные БД;
+    \item Система выводит пользователю сообщение об успехе.
+\end{enumerate}
+
+\paragraph{Исключения:}
+\begin{enumerate}[start=1,label=\arabic*A.]
+    \item Пользователь не авторизован или не имеет соответсвующих прав
+\end{enumerate}
+\begin{enumerate}[start=7,label=\arabic*A.]
+    \item Билет был куплен другим пользователем после выбора
+\end{enumerate}
+
+\begin{figure}[h!]
+    \includegraphics[height=\textheight,keepaspectratio]{build/img/cart_view.png}
+    \label{fig:cart}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/ticket_cart.png}
+    \caption{Програмная архитектура варианта использования}
+    \label{fig:fs_cart}
+\end{figure}
+
+\paragraph{Требования к шаблону html:}
+Динамический шаблон «Продажа билетов».
+\begin{enumerate}
+    \item Шаблон содержит следующие форму ввода select для выбора сеанса.;
+    \item Шаблон содержит кнопу перехода в главное менюl
+    \item Шаблон содержит поле с информацией о выбранном сеансе;
+    \item Шаблон содержит множество форм, отоброжающих билеты (доступные, в корзине и проданные);
+    \item Шаблон содержит таблицу с билетами в корзине и их общей ценой, а также кнопками для удаления из корзины;
+    \item Шаблон содержит кнопки для оформления покупки и очистки корзины.
+\end{enumerate}
+
+\clearpage
+\section*{Инфологическая модель базы данных}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{img/db_infological_smaller.png}
+    \label{fig:bd_infological}
+\end{figure}
+
+
+\section*{Логическая модель базы данных}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+user_id & login & password & role \\
+\hline
+PK &  &  &  \\
+\hline
+\end{tabular}
+\caption{users}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+hall_id & hall_number & name & total_seats \\
+\hline
+PK &  &  &  \\
+\hline
+\end{tabular}
+\caption{halls}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+ts_id & hall_id & locale & ts_name \\
+\hline
+PK & FK &  &  \\
+\hline
+\end{tabular}
+\caption{halls_ts}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c}
+\hline
+schema_id & hall_id & row_num & start_seat & end_seat & base_price \\
+\hline
+PK & FK &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{hall_schema}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+film_id & title & country & year & director & studio & duration & description \\
+\hline
+PK &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{films}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ts_id & film_id & locale & ts_country & ts_title & ts_director & ts_description \\
+\hline
+PK & FK &  &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{films_ts}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+session_id & film_id & hall_id & session_date & session_time & price_coef \\
+\hline
+PK & FK & FK &  &  &  \\
+\hline
+\end{tabular}
+\caption{sessions}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ticket_id & session_id & row_num & seat_number & price & is_sold & sold_datetime \\
+\hline
+PK & FK &  &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{tickets}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+report_id & report_month & report_year & total_tickets_sold & created_at \\
+\hline
+PK &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{ticket_count_reports}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+report_id & report_month & report_year & total_revenue & created_at \\
+\hline
+PK &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{total_revenue_reports}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+report_id & report_month & report_year & sessions_count & avg_ticket_price & created_at \\
+\hline
+PK &  &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{sessions_avgprice_reports}
+\end{table}
 
 \end{document}

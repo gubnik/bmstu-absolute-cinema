@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="C4a7x84Iuv04L04NgG2D-1" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+        <mxCell id="C4a7x84Iuv04L04NgG2D-1" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="630" y="890" as="sourcePoint" />
             <mxPoint x="630" y="15" as="targetPoint" />
@@ -77,7 +77,7 @@
             <mxPoint x="639" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DM_JxgKuVuJx3bZMxFUk-17" value="Имя запроса" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-16" vertex="1" connectable="0">
+        <mxCell id="DM_JxgKuVuJx3bZMxFUk-17" value="Параметры&lt;div&gt;запроса&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-16" vertex="1" connectable="0">
           <mxGeometry x="-0.3667" y="-2" relative="1" as="geometry">
             <mxPoint x="15" y="-2" as="offset" />
           </mxGeometry>
@@ -102,7 +102,7 @@
             <mxPoint x="640" y="319.65999999999997" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DM_JxgKuVuJx3bZMxFUk-24" value="SQL-запрос,&lt;div&gt;параметры&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-23" vertex="1" connectable="0">
+        <mxCell id="DM_JxgKuVuJx3bZMxFUk-24" value="SQL-запрос" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="DM_JxgKuVuJx3bZMxFUk-23" vertex="1" connectable="0">
           <mxGeometry x="0.0881" y="1" relative="1" as="geometry">
             <mxPoint x="-4" as="offset" />
           </mxGeometry>
@@ -333,10 +333,10 @@
             <mxPoint x="990" y="750" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MsiDJjGxcOWOd94EIt2d-11" value="Данные отсутствуют" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="MsiDJjGxcOWOd94EIt2d-11" value="За данный период отчета не существует" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="260" y="760" width="120" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="MsiDJjGxcOWOd94EIt2d-12" value="Сообщение об ошибке в статической error.html" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="MsiDJjGxcOWOd94EIt2d-12" value="Сообщение об ошибке" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="85" y="810" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="MsiDJjGxcOWOd94EIt2d-13" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
